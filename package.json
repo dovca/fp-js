@@ -1,0 +1,19 @@
+{
+  "name": "mini-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "faker": "^4.1.0",
+    "mocha": "^6.1.4"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "sinon": "^7.3.2"
+  }
+}
