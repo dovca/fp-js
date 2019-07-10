@@ -57,11 +57,11 @@ const _ = (A) => A,
 
 	/**
 	 * w - While
-	 * @param {function: boolean} C function that return the condition expression
-	 * @param {function} [F=function: undefined] function to call each iteration
+	 * @param {function: boolean} C function that returns the condition expression
+	 * @param {function} F function to call each iteration
 	 * @returns {undefined}
 	 */
-	w = (C, F = _) => i(C, () => (F(), w(C, F))),
+	w = (C, F) => i(C, () => (F(), w(C, F))),
 
 	/**
 	 * o - Or
