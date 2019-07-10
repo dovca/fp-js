@@ -16,13 +16,13 @@ describe('$ - Function wrap', function() {
 		const add = (x) => x + x;
 		const concat = (x) => `${x}${x}`;
 		const testCases = [
-			{output: () => $(-1, add)(), expected: -2},
-			{output: () => $(0, add)(), expected: 0},
-			{output: () => $(1, add)(), expected: 2},
+			{output: () => $(add, -1)(), expected: -2},
+			{output: () => $(add, 0)(), expected: 0},
+			{output: () => $(add, 1)(), expected: 2},
 
-			{output: () => $('abc', concat)(), expected: 'abcabc'},
-			{output: () => $('', concat)(), expected: ''},
-			{output: () => $('x', concat)(), expected: 'xx'},
+			{output: () => $(concat, 'abc')(), expected: 'abcabc'},
+			{output: () => $(concat, '')(), expected: ''},
+			{output: () => $(concat, 'x')(), expected: 'xx'},
 		];
 
 		for (let i = 0, length = testCases.length; i < length; i++) {

@@ -1,7 +1,7 @@
 const {t} = require('../constructs');
 const assert = require('assert');
 
-describe('t - True', function() {
+/*describe('t - True', function() {
 	it('Should output true', function() {
 		const testCases = [
 			{output: () => t(), expected: true},
@@ -15,4 +15,4 @@ describe('t - True', function() {
 			assert.deepStrictEqual(output, expected, `Test case #${i}: ${output} should equal ${expected}`);
 		}
 	})
-});
+});*/

@@ -18,33 +18,11 @@
 const _ = (A) => A,
 
 	/**
-	 * $ - Function wrap
-	 * @param {*} A anything
-	 * @param {function} [F=_]
-	 * @returns {function} function that returns A passed through F
-	 */
-	$ = (A, F = _) => () => F(A),
-
-	/**
 	 * y - Create array from values
 	 * @param {...*} A
 	 * @returns {*[]}
 	 */
 	y = (...A) => A,
-
-	/**
-	 * n - Negation or NOR
-	 * @param {*} A
-	 * @param {*} [B=A]
-	 * @returns {boolean} negation of A if parameter B is omitted, A NOR B otherwise
-	 */
-	n = (A, B = A) => !(A || B),
-
-	/**
-	 * t - True
-	 * @returns {boolean} true
-	 */
-	t = $(_(), n),
 
 	/**
 	 * i - If/else
@@ -56,12 +34,50 @@ const _ = (A) => A,
 	i = (C, T, F = _) => C() ? T() : F(),
 
 	/**
+	 * e - Equal to
+	 * @param A
+	 * @param [B]
+	 * @returns {boolean} true if A is strictly equal to B, false otherwise
+	 */
+	e = (A, B) => A === B,
+
+	/**
+	 * x - First element in collection
+	 * @param {object|array|string} C
+	 * @returns {*}
+	 */
+	x = ([A]) => A,
+
+	/**
+	 * q - Dequeue
+	 * @param A
+	 * @returns {*[]}
+	 */
+	q = ([, ...A]) => A,
+
+	/**
+	 * $ - Function wrap
+	 * @param {*} A anything
+	 * @param {function} [F=_]
+	 * @returns {function} function that returns A passed through F
+	 */
+	$ = (F, ...A) => () => i(() => e(x(A)), () => F, () => F(...A)),
+
+	/**
+	 * n - Negation or NOR
+	 * @param {*} A
+	 * @param {*} [B=A]
+	 * @returns {boolean} negation of A if parameter B is omitted, A NOR B otherwise
+	 */
+	n = (A, B = A) => !(A || B),
+
+	/**
 	 * w - While
 	 * @param {function: boolean} C function that return the condition expression
 	 * @param {function} [F=function: undefined] function to call each iteration
 	 * @returns {undefined}
 	 */
-	w = (C, F = _) => i(C, () => (F(), w(C, F))),
+	w = (C, F) => i(C, () => (F(), w(C, F))),
 
 	/**
 	 * o - Or
@@ -77,13 +93,13 @@ const _ = (A) => A,
 	 * @param {numeric} [B=false]
 	 * @returns {number} B - A
 	 */
-	s = (A = t(), B = n(t())) => B - A,
+	s = (A = e(), B = n(e())) => B - A,
 
 	/**
 	 * z - Zero
 	 * @returns {number} 0
 	 */
-	z = $(y(), s),
+	z = $(s, y()),
 
 	/**
 	 * a - Add
@@ -91,7 +107,7 @@ const _ = (A) => A,
 	 * @param {numeric} [B=true]
 	 * @returns {number}
 	 */
-	a = (A = z(), B = t()) => s(s(B), A),
+	a = (A = z(), B = e()) => s(s(B), A),
 
 	/**
 	 * d - Double
@@ -109,34 +125,12 @@ const _ = (A) => A,
 	m = (A, {[A]: B}) => B,
 
 	/**
-	 * x - First element in collection
-	 * @param {object|array|string} C
-	 * @returns {*}
-	 */
-	x = ([A]) => A,
-
-	/**
-	 * q - Dequeue
-	 * @param A
-	 * @returns {*[]}
-	 */
-	q = ([, ...A]) => A,
-
-	/**
-	 * e - Equal to
-	 * @param A
-	 * @param [B]
-	 * @returns {boolean} true if A is strictly equal to B, false otherwise
-	 */
-	e = (A, B) => A === B,
-
-	/**
 	 * c - Count
 	 * @param {object|array|string} A
 	 * @param {number} [I=0] starting index
 	 * @returns {number} length of array A
 	 */
-	c = (A, I = z()) => i($(m(I, A), e), $(I), () => c(A, a(I))),
+	c = (A, I = z()) => i($(e, m(I, A)), $(I), $(c, A, a(I))),
 
 	/**
 	 * l - Less than
@@ -161,7 +155,7 @@ const _ = (A) => A,
 	 * @param {function} [F=function: undefined]
 	 * @returns {*} whatever T() or F() returns
 	 */
-	k = (A, T, F = _) => i($(x(A), e), F, T),
+	k = (A, T, F = _) => i($(e, x(A)), F, T),
 
 	/**
 	 * g - Compose functions
@@ -202,14 +196,14 @@ const _ = (A) => A,
 	 * @param C
 	 * @returns {*}
 	 */
-	u = (F, A, B, ...C) => F(A, k(C, () => u(F, B, ...C), $(B))),
+	u = (F, A, B, ...C) => F(A, k(C, $(u, F, B, ...C), $(B))),
 
 	/**
 	 * j - Create object from pairs of keys and values
 	 * @param {...array} P
 	 * @returns {object}
 	 */
-	j = (...P) => k(P, () => u((V, S) => ({...S, ...{[x(V)]: x(q(V))}}), ...P, j()), $({})),
+	j = (...P) => k(P, $(u, ([K, V], S) => ({...S, ...{[K]: V}}), ...P, j), $({})),
 
 	/**
 	 * r - Curry
@@ -218,7 +212,7 @@ const _ = (A) => A,
 	 * @param A
 	 * @returns {function(*=): *}
 	 */
-	r = (F, N = d(), ...A) => (X) => i($(b(N, d())), () => r(F, s(t(), N), ...A, X), () => u(F, ...A, X)),
+	r = (F, N = d(), ...A) => (X) => i($(b(N, d())), $(r, F, s(e(), N), ...A, X), $(u, F, ...A, X)),
 
 	/**
 	 * h - Switch
@@ -226,8 +220,8 @@ const _ = (A) => A,
 	 * @param {...caseParameter} [R] other cases
 	 * @returns {*} anything that the executed case returns or zero if no case was executed
 	 */
-	h = (C, ...R) => i(x(C), x(q(C)), () => k(R, () => h(...R)));
+	h = ([C, B], ...R) => i(C, B, $(k, R, $(h, ...R)));
 
 module.exports = {
-	$, _, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
+	$, _, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, /*t,*/ u, v, w, x, y, z
 };

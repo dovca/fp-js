@@ -1,46 +1,51 @@
 digraph dependencies {
 
+    { rank = same; n; e; x; "_"; q; y; l; m; }
+
     n [style=filled];
     i [style=filled];
     s [style=filled];
     e [style=filled];
     l [style=filled];
 
-    "$" -> _;
-    t -> n;
-    t -> _;
-    i -> _;
-    w -> i;
+    "_";
+    q;
+    y;
+    e;
+    x;
+    n;
+    m;
+    l;
+    i -> "_";
+    "$" -> i;
+    "$" -> e;
+    "$" -> x;
+    w -> w -> i;
     o -> n;
-    s -> t;
+    s -> n;
+    s -> e;
+    z -> "$";
     z -> s;
     z -> y;
-    a -> z;
+    a -> s;
     d -> a;
-    c -> c -> z;
-    c -> e;
-    c -> i;
-    c -> "$";
+    c -> c -> "$";
     c -> m;
-    l -> z;
+    c -> a;
+    b -> n;
     b -> l;
-    k -> i;
     k -> "$";
-    k -> e;
-    k -> x;
     g -> g -> k;
     v -> v -> k;
     v -> y;
     f -> f -> k;
     f -> y;
-    p -> g;
-    p -> v;
     u -> u -> k;
     j -> j -> u;
-    j -> q;
-    r -> r -> d;
-    r -> u;
+    r -> r -> u;
+    r -> d;
     r -> b;
     h -> h -> k;
-    h -> q;
+    p -> g;
+    p -> v;
 }
