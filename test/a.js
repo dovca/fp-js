@@ -1,7 +1,7 @@
 const {a} = require('../constructs');
 const assert = require('assert');
 
-describe('a', function() {
+describe('a - Logical AND', function() {
 	it('Should work with one argument', function() {
 		const testCases = [
 			{output: () => a(true), expected: true},

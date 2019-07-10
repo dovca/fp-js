@@ -2,7 +2,7 @@ const {g} = require('../constructs');
 const assert = require('assert');
 const randomer = require('../util/randomer');
 
-describe('g', function() {
+describe('g - Compose', function() {
 	const double = (x) => 2 * x;
 	const add = (x) => x + 1;
 	const minus = (x) => -x;

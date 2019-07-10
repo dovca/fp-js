@@ -1,7 +1,7 @@
 const {v} = require('../constructs');
 const assert = require('assert');
 
-describe('v', function() {
+describe('v - Reverse', function() {
 	it('Should work with one argument', function() {
 		const testCases = [
 			{output: () => v(null), expected: [null]},

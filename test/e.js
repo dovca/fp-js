@@ -2,7 +2,7 @@ const {e} = require('../constructs');
 const assert = require('assert');
 const randomer = require('../util/randomer');
 
-describe('e', function() {
+describe('e - Equal', function() {
 	it('Should work with undefined', function() {
 		const testCases = [
 			{output: () => e(undefined, undefined), expected: true},

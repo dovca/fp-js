@@ -11,7 +11,8 @@
     "mocha": "^6.1.4"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "dependency-graph": "dot -Tpng -O dependencies.dot"
   },
   "dependencies": {
     "sinon": "^7.3.2"

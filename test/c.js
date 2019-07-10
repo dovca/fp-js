@@ -2,7 +2,7 @@ const {c} = require('../constructs');
 const assert = require('assert');
 const randomer = require('../util/randomer');
 
-describe('c', function() {
+describe('c - Count', function() {
 	it('Should work with arrays', function() {
 		const testCases = [
 			{output: () => c([]), expected: 0},

@@ -1,7 +1,7 @@
 const {t} = require('../constructs');
 const assert = require('assert');
 
-describe('t', function() {
+describe('t - True', function() {
 	it('Should output true', function() {
 		const testCases = [
 			{output: () => t(), expected: true},

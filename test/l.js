@@ -2,7 +2,7 @@ const {l} = require('../constructs');
 const assert = require('assert');
 const randomer = require('../util/randomer');
 
-describe('l', function() {
+describe('l - Less than', function() {
 	it('Should work with one argument', function() {
 		const testCases = [
 			{output: () => l(randomer.integer(-100, 0)), expected: true},

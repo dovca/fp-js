@@ -3,7 +3,7 @@ const assert = require('assert');
 const randomer = require('../util/randomer');
 const sinon = require('sinon');
 
-describe('d', function() {
+describe('d - Reduce', function() {
 	const sum = (a, b) => a + b;
 
 	it('Should work with function and two arguments', function() {

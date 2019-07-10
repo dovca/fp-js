@@ -3,7 +3,7 @@ const assert = require('assert');
 const randomer = require('../util/randomer');
 const sinon = require('sinon');
 
-describe('k', function() {
+describe('k - If not empty', function() {
 	it('Should work with one function', function() {
 		const trueBranch = () => 'foo';
 		const spiedTrueBranch = sinon.spy(trueBranch);

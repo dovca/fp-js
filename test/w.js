@@ -3,7 +3,7 @@ const assert = require('assert');
 const randomer = require('../util/randomer');
 const sinon = require('sinon');
 
-describe('w', function() {
+describe('w - While', function() {
 	it('Should not do anything with false condition', function() {
 		const fn = () => 'foo';
 

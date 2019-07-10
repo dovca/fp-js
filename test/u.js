@@ -1,7 +1,7 @@
-const {u} = require('../constructs');
+/*const {u} = require('../constructs');
 const assert = require('assert');
 
-describe('u', function() {
+describe('u - Undefined', function() {
 	it('Should work', function() {
 		const testCases = [
 			{output: () => u(undefined), expected: true},
@@ -27,4 +27,4 @@ describe('u', function() {
 			assert.deepStrictEqual(output, expected, `Test case #${i}: ${output} should equal ${expected}`);
 		}
 	});
-});
+});*/

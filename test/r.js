@@ -3,41 +3,44 @@ const assert = require('assert');
 const randomer = require('../util/randomer');
 const sinon = require('sinon');
 
-describe('r', function() {
-	const fn = (x) => x;
+describe('r - Curry', function() {
+	const sum = (a, b) => a + b;
 
-	it('Should not do anything with empty array', function() {
-		const spiedFn = sinon.spy(fn);
-		const spiedR = sinon.spy(r);
+	it('Should work for depth 2', function() {
+		const curried = r(sum, 2);
+		const testCases = [
+			{output: () => curried(0)(0), expected: 0},
+			{output: () => curried(0)(1), expected: 1},
+			{output: () => curried(1)(2), expected: 3},
+			{output: () => curried(1000)(500), expected: 1500},
+			{output: () => curried(-100)(500), expected: 400},
+		];
 
-		spiedR([], spiedFn);
-		assert.deepStrictEqual(spiedFn.notCalled, true, `fn should have not been called`);
-		assert.deepStrictEqual(spiedR.calledOnce, true, `r should have been called exactly once`);
-		assert.deepStrictEqual(spiedR.getCall(0).returned(undefined), true, `Expected r() to return undefined`);
-	});
+		for (let i = 0, length = testCases.length; i < length; i++) {
+			const tc = testCases[i];
+			const output = tc.output();
+			const expected = tc.expected;
 
-	it('Should work with array of length 1', function() {
-		const spiedFn = sinon.spy(fn);
-		const spiedR = sinon.spy(r);
-
-		spiedR([1], spiedFn);
-		assert.deepStrictEqual(spiedFn.calledOnce, true, `fn should have been called exactly once`);
-		assert.deepStrictEqual(spiedR.calledOnce, true, `r should have been called exactly once`);
-		assert.deepStrictEqual(spiedR.getCall(0).returned(undefined), true, `Expected r() to return undefined`);
-	});
-
-	it('Should work with array of any length', function() {
-		const spiedFn = sinon.spy(fn);
-		const spiedR = sinon.spy(r);
-		const length = randomer.integer(5, 20);
-
-		spiedR(randomer.array((i) => -i, length), spiedFn);
-		assert.deepStrictEqual(spiedFn.callCount, length, `fn should have been called exactly ${length} times`);
-
-		for (let i = 0; i < length; i++) {
-			assert.deepStrictEqual(spiedFn.getCall(i).returned(-i), true, `callback function should have returned ${-i}`);
+			assert.deepStrictEqual(output, expected, `Test case #${i}: ${output} should equal ${expected}`);
 		}
+	});
 
-		assert.deepStrictEqual(spiedR.getCall(0).returned(undefined), true, `Expected r() to return undefined`);
+	it('Should work for any depth', function() {
+		const curried3 = r(sum, 3);
+		const curried5 = r(sum, 5);
+		const curried10 = r(sum, 10);
+		const testCases = [
+			{output: () => curried3(1)(10)(100), expected: 111},
+			{output: () => curried5(1)(2)(3)(4)(5), expected: 15},
+			{output: () => curried10(1)(1)(1)(1)(1)(1)(1)(1)(1)(1), expected: 10},
+		];
+
+		for (let i = 0, length = testCases.length; i < length; i++) {
+			const tc = testCases[i];
+			const output = tc.output();
+			const expected = tc.expected;
+
+			assert.deepStrictEqual(output, expected, `Test case #${i}: ${output} should equal ${expected}`);
+		}
 	});
 });

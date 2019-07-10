@@ -3,7 +3,7 @@ const assert = require('assert');
 const randomer = require('../util/randomer');
 const sinon = require('sinon');
 
-describe('h', function() {
+describe('h - Switch', function() {
 	const fn = (x) => x;
 
 	it('Should work without default case', function() {

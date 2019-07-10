@@ -2,7 +2,7 @@ const {m} = require('../constructs');
 const assert = require('assert');
 const randomer = require('../util/randomer');
 
-describe('m', function () {
+describe('m - Member', function () {
 	it('Should work with arrays', function () {
 		const testCases = [
 			{output: () => m(0, []), expected: undefined},

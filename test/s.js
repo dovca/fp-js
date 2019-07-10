@@ -1,7 +1,7 @@
 const {s} = require('../constructs');
 const assert = require('assert');
 
-describe('s', function() {
+describe('s - Subtract', function() {
 	it('Should work without arguments', function() {
 		const testCases = [
 			{output: () => s(), expected: -1},

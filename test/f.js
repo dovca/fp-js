@@ -2,7 +2,7 @@ const {f} = require('../constructs');
 const assert = require('assert');
 const randomer = require('../util/randomer');
 
-describe('f', function() {
+describe('f - Transform', function() {
 	const double = (x) => 2 * x;
 
 	it('Should work with function and one argument', function() {

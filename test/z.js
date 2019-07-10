@@ -1,7 +1,7 @@
 const {z} = require('../constructs');
 const assert = require('assert');
 
-describe('z', function() {
+describe('z - Zero', function() {
 	it('Should output 0', function() {
 		const testCases = [
 			{output: () => z(), expected: 0},

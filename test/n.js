@@ -1,7 +1,7 @@
 const {n} = require('../constructs');
 const assert = require('assert');
 
-describe('n', function() {
+describe('n - Logical NOR', function() {
 	it('Should work with one argument', function() {
 		const testCases = [
 			{output: () => n(true), expected: false},

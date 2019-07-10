@@ -1,11 +1,11 @@
-const {y} = require('../constructs');
+const {j} = require('../constructs');
 const assert = require('assert');
 const randomer = require('../util/randomer');
 
-describe('y - Array', function() {
+describe('j - Object', function() {
 	it('Should work without arguments', function() {
 		const testCases = [
-			{output: () => y(), expected: []},
+			{output: () => j(), expected: {}},
 		];
 
 		for (let i = 0, length = testCases.length; i < length; i++) {
@@ -20,13 +20,10 @@ describe('y - Array', function() {
 	it('Should work with one argument', function() {
 		const random = randomer.anything();
 		const testCases = [
-			{output: () => y(null), expected: [null]},
-			{output: () => y(0), expected: [0]},
-			{output: () => y(1), expected: [1]},
-			{output: () => y('a'), expected: ['a']},
-			{output: () => y({a: 1}), expected: [{a: 1}]},
-			{output: () => y([1, 2, 3]), expected: [[1, 2, 3]]},
-			{output: () => y(random), expected: [random]},
+			{output: () => j([0, 1]), expected: {0: 1}},
+			{output: () => j(['abc', 'def']), expected: {abc: 'def'}},
+			{output: () => j(['x', {a: 1}]), expected: {x: {a: 1}}},
+			{output: () => j([random, random]), expected: {[random]: random}},
 		];
 
 		for (let i = 0, length = testCases.length; i < length; i++) {
@@ -39,13 +36,9 @@ describe('y - Array', function() {
 	});
 
 	it('Should work with many arguments', function() {
-		const randomArray = randomer.array(randomer.anything);
 		const testCases = [
-			{output: () => y(null, false, '', 0, []), expected: [null, false, '', 0, []]},
-			{output: () => y(0, 1, 2, 3, 4), expected: [0, 1, 2, 3, 4]},
-			{output: () => y([1, 2], [3, 4], [5, 6]), expected: [[1, 2], [3, 4], [5, 6]]},
-			{output: () => y({a: 1}, {b: 2}, {c: [3, 4, 5]}), expected: [{a: 1}, {b: 2}, {c: [3, 4, 5]}]},
-			{output: () => y(...randomArray), expected: randomArray},
+			{output: () => j([0, 1], [2, 3], [4, 5]), expected: {0: 1, 2: 3, 4: 5}},
+			{output: () => j(['abc', 1], ['def', null]), expected: {abc: 1, def: null}},
 		];
 
 		for (let i = 0, length = testCases.length; i < length; i++) {

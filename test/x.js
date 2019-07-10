@@ -1,13 +1,14 @@
-const {b} = require('../constructs');
+const {x} = require('../constructs');
 const assert = require('assert');
 const randomer = require('../util/randomer');
 
-describe('b - Bigger than', function() {
-	it('Should work with one argument', function() {
+describe('x - Extract', function() {
+	it('Should work with arrays', function() {
 		const testCases = [
-			{output: () => b(randomer.integer(-100, 0)), expected: false},
-			{output: () => b(0), expected: false},
-			{output: () => b(randomer.integer(1, 100)), expected: true},
+			{output: () => x([]), expected: undefined},
+			{output: () => x([0]), expected: 0},
+			{output: () => x([1, 2, 3]), expected: 1},
+			{output: () => x(['abc', 'def']), expected: 'abc'},
 		];
 
 		for (let i = 0, length = testCases.length; i < length; i++) {
@@ -19,13 +20,12 @@ describe('b - Bigger than', function() {
 		}
 	});
 
-	it('Should work with two arguments', function() {
+	it('Should work with strings', function() {
 		const testCases = [
-			{output: () => b(randomer.integer(-100, 0), randomer.integer(0, 100)), expected: false},
-			{output: () => b(randomer.integer(0, 100), randomer.integer(-100, 0)), expected: true},
-			{output: () => b(0, 0), expected: false},
-			{output: () => b(-1, -1), expected: false},
-			{output: () => b(1, 1), expected: false},
+			{output: () => x(''), expected: undefined},
+			{output: () => x('a'), expected: 'a'},
+			{output: () => x('abc'), expected: 'a'},
+			{output: () => x('ghijklmnopqrstuv'), expected: 'g'},
 		];
 
 		for (let i = 0, length = testCases.length; i < length; i++) {

@@ -2,7 +2,7 @@ const {$} = require('../constructs');
 const assert = require('assert');
 const randomer = require('../util/randomer');
 
-describe('$', function() {
+describe('$ - Function wrap', function() {
 	it('Should work without a specified function', function() {
 		const data = randomer.array(randomer.anything);
 		for (const d of data) {

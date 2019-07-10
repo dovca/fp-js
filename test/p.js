@@ -2,7 +2,7 @@ const {p} = require('../constructs');
 const assert = require('assert');
 const randomer = require('../util/randomer');
 
-describe('p', function() {
+describe('p - Pipe', function() {
 	const double = (x) => 2 * x;
 	const add = (x) => x + 1;
 	const minus = (x) => -x;

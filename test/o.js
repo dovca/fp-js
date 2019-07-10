@@ -1,7 +1,7 @@
 const {o} = require('../constructs');
 const assert = require('assert');
 
-describe('o', function() {
+describe('o - Logical OR', function() {
 	it('Should work with one argument', function() {
 		const testCases = [
 			{output: () => o(true), expected: true},

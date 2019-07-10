@@ -23,7 +23,7 @@ const _ = (A) => A,
 	 * @param {function} [F=_]
 	 * @returns {function} function that returns A passed through F
 	 */
-	$ = (A, F = _) => () => F(A),
+	$ = (A, F = _) => (Q) => F(A),
 
 	/**
 	 * y - Create array from values
@@ -41,10 +41,11 @@ const _ = (A) => A,
 	n = (A, B = A) => !(A || B),
 
 	/**
-	 * t - Tautology
+	 * t - True
+	 * @param [Q]
 	 * @returns {boolean} true
 	 */
-	t = () => n(n(y())),
+	t = (Q) => n(_()),
 
 	/**
 	 * i - If/else
@@ -61,7 +62,7 @@ const _ = (A) => A,
 	 * @param {function} [F] function to call each iteration
 	 * @returns {undefined}
 	 */
-	w = (C, F = _) => i(C, () => (F(), w(C, F))),
+	w = (C, F = _) => i(C, (Q) => (F(), w(C, F))),
 
 	/**
 	 * o - Or
@@ -89,9 +90,10 @@ const _ = (A) => A,
 
 	/**
 	 * z - Zero
+	 * @param [Q]
 	 * @returns {number} 0
 	 */
-	z = () => s(n(y())),
+	z = (Q) => s(y()),
 
 	/**
 	 * m - Member
@@ -133,19 +135,12 @@ const _ = (A) => A,
 	e = (A, B) => A === B,
 
 	/**
-	 * u - Test if undefined
-	 * @param A
-	 * @returns {boolean}
-	 */
-	u = (A) => e(_(), A),
-
-	/**
 	 * c - Count
 	 * @param {object|array|string} A
 	 * @param {number} [I=0] starting index
 	 * @returns {number} length of array A
 	 */
-	c = (A, I = z()) => i($(u(m(I, A))), $(I), () => c(A, s(s(), I))),
+	c = (A, I = z()) => i($(e(m(I, A))), $(I), (Q) => c(A, s(s(), I))),
 
 	/**
 	 * l - Less than
@@ -158,7 +153,7 @@ const _ = (A) => A,
 	/**
 	 * k - If array is not empty
 	 */
-	k = (A, T, F = _) => i($(u(x(A))), F, T),
+	k = (A, T, F = _) => i($(e(x(A))), F, T),
 
 	/**
 	 * g - Compose functions
@@ -166,19 +161,19 @@ const _ = (A) => A,
 	 * @param {...function} R other function
 	 * @returns {function(*=): *} composed function: g(a, b, c)(x) === a(b(c(x)))
 	 */
-	g = (F, ...R) => (X) => F(k(R, () => g(...R)(X), $(X))),
+	g = (F, ...R) => (X) => F(k(R, (Q) => g(...R)(X), $(X))),
 
 	/**
 	 * v - Reverse parameters
 	 * @returns {array} reversed parameters in an array
 	 */
-	v = (A, ...B) => y(...k(B, () => v(...B), $(B)), A),
+	v = (A, ...B) => y(...k(B, (Q) => v(...B), $(B)), A),
 
 	/**
 	 * f - Transform parameters
 	 * @returns {array} parameters in an array, each passed through F
 	 */
-	f = (F, A, ...B) => y(F(A), ...k(B, () => f(F, ...B), $(B))),
+	f = (F, A, ...B) => y(F(A), ...k(B, (Q) => f(F, ...B), $(B))),
 
 	/**
 	 * p - Pipe functions
@@ -188,30 +183,29 @@ const _ = (A) => A,
 	p = (...F) => g(...v(...F)),
 
 	/**
-	 * d - Reduce from right, last parameter should be the starting value
+	 * d - Reduce from right, last parameter is the starting value
 	 * @param {function} F function(value, accumulator)
 	 * @param A
 	 * @param B
 	 * @param C
 	 * @returns {*}
 	 */
-	d = (F, A, B, ...C) => F(A, k(C, () => d(F, B, ...C), $(B))),
+	d = (F, A, B, ...C) => F(A, k(C, (Q) => d(F, B, ...C), $(B))),
 
 	/**
 	 * j - Create object from pairs of keys and values
 	 * @param {...array} P
 	 * @returns {object}
 	 */
-	j = (...P) => k(P, () => d((V, S) => ({...S, ...{[x(V)]: x(q(...V))}}), ...P, j()), $({})),
+	j = (...P) => k(P, (Q) => d((V, S) => ({...S, ...{[x(V)]: x(q(...V))}}), ...P, j()), $({})),
 
 	/**
-	 * r - Iterator: Call F with each value of collection C
-	 * @param {array} C collection
-	 * @param {function} F function
-	 * @param {numeric} [I=0] starting index
-	 * @returns {undefined}
+	 * r - Curry
+	 * @param F
+	 * @param A
+	 * @returns {function(*=): *}
 	 */
-	r = (C, F, I = z()) => i($(l(I, c(C))), () => (F(m(I, C), C), r(C, F, s(s(), I)))),
+	r = (F, N, ...A) => (X) => i($(b(N, s(s()))), (Q) => r(F, s(t(), N), ...A, X), (Q) => d(F, ...A, X)),
 
 	/**
 	 * h - Switch
@@ -219,35 +213,8 @@ const _ = (A) => A,
 	 * @param {...caseParameter} [R] other cases
 	 * @returns {*} anything that the executed case returns or zero if no case was executed
 	 */
-	h = (C, ...R) => i(x(C), x(q(...C)), () => k(R, () => h(...R)));
+	h = (C, ...R) => i(x(C), x(q(...C)), (Q) => k(R, (Q) => h(...R)));
 
 module.exports = {
-	$,
-	_,
-	a,
-	b,
-	c,
-	d,
-	e,
-	f,
-	g,
-	h,
-	i,
-	j,
-	k,
-	l,
-	m,
-	n,
-	o,
-	p,
-	q,
-	r,
-	s,
-	t,
-	u,
-	v,
-	w,
-	x,
-	y,
-	z
+	$, _, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, /*u,*/ v, w, x, y, z
 };

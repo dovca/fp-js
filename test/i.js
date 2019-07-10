@@ -3,7 +3,7 @@ const assert = require('assert');
 const randomer = require('../util/randomer');
 const sinon = require('sinon');
 
-describe('i', function() {
+describe('i - If/else', function() {
 	it('Should work with one function', function() {
 		const trueBranch = () => 'foo';
 
