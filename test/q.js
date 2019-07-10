@@ -3,13 +3,13 @@ const assert = require('assert');
 const randomer = require('../util/randomer');
 
 describe('q - Dequeue', function() {
-	it('Should discard first argument', function() {
+	it('Should discard first element in collection', function() {
 		const testCases = [
-			{output: () => q(), expected: []},
-			{output: () => q(1), expected: []},
-			{output: () => q(2, 3), expected: [3]},
-			{output: () => q(4, 5, 6, 7), expected: [5, 6, 7]},
-			{output: () => q(0, [1, 2], [3, 4, 5]), expected: [[1, 2], [3, 4, 5]]},
+			{output: () => q([]), expected: []},
+			{output: () => q([1]), expected: []},
+			{output: () => q([2, 3]), expected: [3]},
+			{output: () => q([4, 5, 6, 7]), expected: [5, 6, 7]},
+			{output: () => q([0, [1, 2], [3, 4, 5]]), expected: [[1, 2], [3, 4, 5]]},
 		];
 
 		for (let i = 0, length = testCases.length; i < length; i++) {

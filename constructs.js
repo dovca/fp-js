@@ -23,7 +23,7 @@ const _ = (A) => A,
 	 * @param {function} [F=_]
 	 * @returns {function} function that returns A passed through F
 	 */
-	$ = (A, F = _) => (Q) => F(A),
+	$ = (A, F = _) => () => F(A),
 
 	/**
 	 * y - Create array from values
@@ -45,7 +45,7 @@ const _ = (A) => A,
 	 * @param [Q]
 	 * @returns {boolean} true
 	 */
-	t = (Q) => n(_()),
+	t = () => n(_()),
 
 	/**
 	 * i - If/else
@@ -62,7 +62,7 @@ const _ = (A) => A,
 	 * @param {function} [F] function to call each iteration
 	 * @returns {undefined}
 	 */
-	w = (C, F = _) => i(C, (Q) => (F(), w(C, F))),
+	w = (C, F = _) => i(C, () => (F(), w(C, F))),
 
 	/**
 	 * o - Or
@@ -93,7 +93,7 @@ const _ = (A) => A,
 	 * @param [Q]
 	 * @returns {number} 0
 	 */
-	z = (Q) => s(y()),
+	z = () => s(y()),
 
 	/**
 	 * m - Member
@@ -108,7 +108,7 @@ const _ = (A) => A,
 	 * @param {object|array|string} C
 	 * @returns {*}
 	 */
-	x = (C) => m(z(), C),
+	x = ([A]) => A,
 
 	/**
 	 * q - Dequeue
@@ -116,15 +116,7 @@ const _ = (A) => A,
 	 * @param B
 	 * @returns {*[]}
 	 */
-	q = (A, ...B) => B,
-
-	/**
-	 * b - Bigger than
-	 * @param {numeric} A
-	 * @param {numeric} [B=0]
-	 * @returns {boolean} true if A is bigger than B
-	 */
-	b = (A, B = z()) => A > B,
+	q = ([, ...A]) => A,
 
 	/**
 	 * e - Equal to
@@ -140,15 +132,23 @@ const _ = (A) => A,
 	 * @param {number} [I=0] starting index
 	 * @returns {number} length of array A
 	 */
-	c = (A, I = z()) => i($(e(m(I, A))), $(I), (Q) => c(A, s(s(), I))),
+	c = (A, I = z()) => i($(e(m(I, A))), $(I), () => c(A, s(s(), I))),
 
 	/**
 	 * l - Less than
 	 * @param {numeric} A
 	 * @param {numeric} [B=0]
-	 * @returns {boolean} true if A is less then B
+	 * @returns {boolean} true if A is less than or equal to B
 	 */
-	l = (A, B = z()) => n(o(b(A, B), e(A, B))),
+	l = (A, B = z()) => A < B,
+
+	/**
+	 * b - Bigger than or equal
+	 * @param {numeric} A
+	 * @param {numeric} [B=0]
+	 * @returns {boolean} true if A is bigger than B
+	 */
+	b = (A, B = z()) => n(l(A, B)),
 
 	/**
 	 * k - If array is not empty
@@ -161,19 +161,19 @@ const _ = (A) => A,
 	 * @param {...function} R other function
 	 * @returns {function(*=): *} composed function: g(a, b, c)(x) === a(b(c(x)))
 	 */
-	g = (F, ...R) => (X) => F(k(R, (Q) => g(...R)(X), $(X))),
+	g = (F, ...R) => (X) => F(k(R, () => g(...R)(X), $(X))),
 
 	/**
 	 * v - Reverse parameters
 	 * @returns {array} reversed parameters in an array
 	 */
-	v = (A, ...B) => y(...k(B, (Q) => v(...B), $(B)), A),
+	v = (A, ...B) => y(...k(B, () => v(...B), $(B)), A),
 
 	/**
 	 * f - Transform parameters
 	 * @returns {array} parameters in an array, each passed through F
 	 */
-	f = (F, A, ...B) => y(F(A), ...k(B, (Q) => f(F, ...B), $(B))),
+	f = (F, A, ...B) => y(F(A), ...k(B, () => f(F, ...B), $(B))),
 
 	/**
 	 * p - Pipe functions
@@ -190,22 +190,23 @@ const _ = (A) => A,
 	 * @param C
 	 * @returns {*}
 	 */
-	d = (F, A, B, ...C) => F(A, k(C, (Q) => d(F, B, ...C), $(B))),
+	d = (F, A, B, ...C) => F(A, k(C, () => d(F, B, ...C), $(B))),
 
 	/**
 	 * j - Create object from pairs of keys and values
 	 * @param {...array} P
 	 * @returns {object}
 	 */
-	j = (...P) => k(P, (Q) => d((V, S) => ({...S, ...{[x(V)]: x(q(...V))}}), ...P, j()), $({})),
+	j = (...P) => k(P, () => d((V, S) => ({...S, ...{[x(V)]: x(q(V))}}), ...P, j()), $({})),
 
 	/**
 	 * r - Curry
 	 * @param F
+	 * @param [N]
 	 * @param A
 	 * @returns {function(*=): *}
 	 */
-	r = (F, N, ...A) => (X) => i($(b(N, s(s()))), (Q) => r(F, s(t(), N), ...A, X), (Q) => d(F, ...A, X)),
+	r = (F, N = z(), ...A) => (X) => i($(b(N)), () => r(F, s(t(), N), ...A, X), () => d(F, ...A, X)),
 
 	/**
 	 * h - Switch
@@ -213,7 +214,7 @@ const _ = (A) => A,
 	 * @param {...caseParameter} [R] other cases
 	 * @returns {*} anything that the executed case returns or zero if no case was executed
 	 */
-	h = (C, ...R) => i(x(C), x(q(...C)), (Q) => k(R, (Q) => h(...R)));
+	h = (C, ...R) => i(x(C), x(q(C)), () => k(R, () => h(...R)));
 
 module.exports = {
 	$, _, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, /*u,*/ v, w, x, y, z

@@ -1,4 +1,11 @@
 digraph dependencies {
+
+    n [style=filled];
+    i [style=filled];
+    s [style=filled];
+    e [style=filled];
+    l [style=filled];
+
     "$" -> _;
     t -> n;
     t -> _;
@@ -9,17 +16,13 @@ digraph dependencies {
     s -> t;
     z -> s;
     z -> y;
-    x -> m;
-    x -> z;
-    b -> z;
     c -> z;
     c -> e;
     c -> i;
     c -> "$";
     c -> m;
-    l -> b;
-    l -> o;
-    l -> e;
+    l -> z;
+    b -> l;
     k -> i;
     k -> "$";
     k -> e;

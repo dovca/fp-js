@@ -6,7 +6,7 @@ describe('b - Bigger than', function() {
 	it('Should work with one argument', function() {
 		const testCases = [
 			{output: () => b(randomer.integer(-100, 0)), expected: false},
-			{output: () => b(0), expected: false},
+			{output: () => b(0), expected: true},
 			{output: () => b(randomer.integer(1, 100)), expected: true},
 		];
 
@@ -23,9 +23,11 @@ describe('b - Bigger than', function() {
 		const testCases = [
 			{output: () => b(randomer.integer(-100, 0), randomer.integer(0, 100)), expected: false},
 			{output: () => b(randomer.integer(0, 100), randomer.integer(-100, 0)), expected: true},
-			{output: () => b(0, 0), expected: false},
-			{output: () => b(-1, -1), expected: false},
-			{output: () => b(1, 1), expected: false},
+			{output: () => b(0, 0), expected: true},
+			{output: () => b(-1, -1), expected: true},
+			{output: () => b(1, 1), expected: true},
+			{output: () => b(0, 1), expected: false},
+			{output: () => b(1, 0), expected: true},
 		];
 
 		for (let i = 0, length = testCases.length; i < length; i++) {
