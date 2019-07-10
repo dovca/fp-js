@@ -1,11 +1,28 @@
 const {a} = require('../constructs');
 const assert = require('assert');
 
-/*describe('a - Logical AND', function() {
+describe('a - Add', function() {
+	it('Should work without arguments', function() {
+		const testCases = [
+			{output: () => a(), expected: 1},
+		];
+
+		for (let i = 0, length = testCases.length; i < length; i++) {
+			const tc = testCases[i];
+			const output = tc.output();
+			const expected = tc.expected;
+
+			assert.deepStrictEqual(output, expected, `Test case #${i}: ${output} should equal ${expected}`);
+		}
+	});
+
+
 	it('Should work with one argument', function() {
 		const testCases = [
-			{output: () => a(true), expected: true},
-			{output: () => a(false), expected: false},
+			{output: () => a(0), expected: 1},
+			{output: () => a(1), expected: 2},
+			{output: () => a(100), expected: 101},
+			{output: () => a(-1), expected: 0},
 		];
 
 		for (let i = 0, length = testCases.length; i < length; i++) {
@@ -19,10 +36,10 @@ const assert = require('assert');
 
 	it('Should work with two arguments', function() {
 		const testCases = [
-			{output: () => a(false, false), expected: false},
-			{output: () => a(true, false), expected: false},
-			{output: () => a(false, true), expected: false},
-			{output: () => a(true, true), expected: true},
+			{output: () => a(0, 0), expected: 0},
+			{output: () => a(0, 1), expected: 1},
+			{output: () => a(1, 0), expected: 1},
+			{output: () => a(100, 200), expected: 300},
 		];
 
 		for (let i = 0, length = testCases.length; i < length; i++) {
@@ -33,4 +50,4 @@ const assert = require('assert');
 			assert.deepStrictEqual(output, expected, `Test case #${i}: ${output} should equal ${expected}`);
 		}
 	});
-});*/
+});

@@ -81,13 +81,6 @@ const _ = (A) => A,
 	s = (A = t(), B = n(t())) => B - A,
 
 	/**
-	 * d - Double
-	 * @param A
-	 * @returns {boolean} 2 * A
-	 */
-	d = (A = a()) => a(A, A),
-
-	/**
 	 * z - Zero
 	 * @param [Q]
 	 * @returns {number} 0
@@ -96,11 +89,18 @@ const _ = (A) => A,
 
 	/**
 	 * a - Add
-	 * @param {boolean} A
-	 * @param {boolean} [B=A]
-	 * @returns {boolean}
+	 * @param {numeric} [A=0]
+	 * @param {numeric} [B=true]
+	 * @returns {number}
 	 */
 	a = (A = z(), B = t()) => s(s(B), A),
+
+	/**
+	 * d - Double
+	 * @param {numeric} [A=1]
+	 * @returns {number} 2 * A
+	 */
+	d = (A = a()) => a(A, A),
 
 	/**
 	 * m - Member
