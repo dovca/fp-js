@@ -12,11 +12,11 @@ digraph dependencies {
     i -> _;
     w -> i;
     o -> n;
-    a -> z;
-    d -> a;
     s -> t;
     z -> s;
     z -> y;
+    a -> z;
+    d -> a;
     c -> z;
     c -> e;
     c -> i;
