@@ -42,7 +42,6 @@ const _ = (A) => A,
 
 	/**
 	 * t - True
-	 * @param [Q]
 	 * @returns {boolean} true
 	 */
 	t = () => n(_()),
@@ -51,7 +50,7 @@ const _ = (A) => A,
 	 * i - If/else
 	 * @param {function: boolean} C function that returns the condition expression
 	 * @param {function} T function to call if C() is true
-	 * @param {function} [F] function to call if C() is false
+	 * @param {function} [F=function: undefined] function to call if C() is false
 	 * @returns {*} whatever T() or F() returns
 	 */
 	i = (C, T, F = _) => C() ? T() : F(),
@@ -59,7 +58,7 @@ const _ = (A) => A,
 	/**
 	 * w - While
 	 * @param {function: boolean} C function that return the condition expression
-	 * @param {function} [F] function to call each iteration
+	 * @param {function} [F=function: undefined] function to call each iteration
 	 * @returns {undefined}
 	 */
 	w = (C, F = _) => i(C, () => (F(), w(C, F))),
@@ -82,7 +81,6 @@ const _ = (A) => A,
 
 	/**
 	 * z - Zero
-	 * @param [Q]
 	 * @returns {number} 0
 	 */
 	z = () => s(y()),
@@ -120,16 +118,15 @@ const _ = (A) => A,
 	/**
 	 * q - Dequeue
 	 * @param A
-	 * @param B
 	 * @returns {*[]}
 	 */
 	q = ([, ...A]) => A,
 
 	/**
 	 * e - Equal to
-	 * @param {*} A
-	 * @param {*} [B=0]
-	 * @returns {boolean} true if A is equal to B
+	 * @param A
+	 * @param [B]
+	 * @returns {boolean} true if A is strictly equal to B, false otherwise
 	 */
 	e = (A, B) => A === B,
 
@@ -145,7 +142,7 @@ const _ = (A) => A,
 	 * l - Less than
 	 * @param {numeric} A
 	 * @param {numeric} [B=0]
-	 * @returns {boolean} true if A is less than or equal to B
+	 * @returns {boolean} true if A is less than or equal to B, false otherwise
 	 */
 	l = (A, B = z()) => A < B,
 
@@ -153,12 +150,16 @@ const _ = (A) => A,
 	 * b - Bigger than or equal
 	 * @param {numeric} A
 	 * @param {numeric} [B=0]
-	 * @returns {boolean} true if A is bigger than B
+	 * @returns {boolean} true if A is bigger than B, false otherwise
 	 */
 	b = (A, B = z()) => n(l(A, B)),
 
 	/**
 	 * k - If array is not empty
+	 * @param {array} A
+	 * @param {function} T
+	 * @param {function} [F=function: undefined]
+	 * @returns {*} whatever T() or F() returns
 	 */
 	k = (A, T, F = _) => i($(e(x(A))), F, T),
 
@@ -166,7 +167,7 @@ const _ = (A) => A,
 	 * g - Compose functions
 	 * @param {function} F first function
 	 * @param {...function} R other function
-	 * @returns {function(*=): *} composed function: g(a, b, c)(x) === a(b(c(x)))
+	 * @returns {function} composed function: g(a, b, c)(x) === a(b(c(x)))
 	 */
 	g = (F, ...R) => (X) => F(k(R, () => g(...R)(X), $(X))),
 
@@ -177,15 +178,19 @@ const _ = (A) => A,
 	v = (A, ...B) => y(...k(B, () => v(...B), $(B)), A),
 
 	/**
-	 * f - Transform parameters
-	 * @returns {array} parameters in an array, each passed through F
+	 * f - Transform elements
+	 *
+	 * @param {function} F transformer function
+	 * @param A first element
+	 * @param B other elements
+	 * @returns {array} elements in an array, each passed through F
 	 */
 	f = (F, A, ...B) => y(F(A), ...k(B, () => f(F, ...B), $(B))),
 
 	/**
 	 * p - Pipe functions
 	 * @param {...function} F functions
-	 * @returns {function(*=): *}
+	 * @returns {function}
 	 */
 	p = (...F) => g(...v(...F)),
 
@@ -208,8 +213,8 @@ const _ = (A) => A,
 
 	/**
 	 * r - Curry
-	 * @param F
-	 * @param [N]
+	 * @param {function} F curried function
+	 * @param [N=2] depth of currying
 	 * @param A
 	 * @returns {function(*=): *}
 	 */
