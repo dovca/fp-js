@@ -26,9 +26,9 @@ describe('r - Curry', function() {
 	});
 
 	it('Should work for any depth', function() {
-		const curried3 = r(sum, 1);
-		const curried5 = r(sum, 3);
-		const curried10 = r(sum, 8);
+		const curried3 = r(sum, 3);
+		const curried5 = r(sum, 5);
+		const curried10 = r(sum, 10);
 		const testCases = [
 			{output: () => curried3(1)(10)(100), expected: 111},
 			{output: () => curried5(1)(2)(3)(4)(5), expected: 15},

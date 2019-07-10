@@ -1,7 +1,7 @@
 const {a} = require('../constructs');
 const assert = require('assert');
 
-describe('a - Logical AND', function() {
+/*describe('a - Logical AND', function() {
 	it('Should work with one argument', function() {
 		const testCases = [
 			{output: () => a(true), expected: true},
@@ -33,4 +33,4 @@ describe('a - Logical AND', function() {
 			assert.deepStrictEqual(output, expected, `Test case #${i}: ${output} should equal ${expected}`);
 		}
 	});
-});
+});*/

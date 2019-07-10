@@ -73,14 +73,6 @@ const _ = (A) => A,
 	o = (A, B = A) => n(n(A, B)),
 
 	/**
-	 * a - And
-	 * @param {boolean} A
-	 * @param {boolean} [B=A]
-	 * @returns {boolean} true if both A and B are true
-	 */
-	a = (A, B = A) => n(n(A), n(B)),
-
-	/**
 	 * s - Subtract
 	 * @param {numeric} [A=true]
 	 * @param {numeric} [B=false]
@@ -89,11 +81,26 @@ const _ = (A) => A,
 	s = (A = t(), B = n(t())) => B - A,
 
 	/**
+	 * d - Double
+	 * @param A
+	 * @returns {boolean} 2 * A
+	 */
+	d = (A = a()) => a(A, A),
+
+	/**
 	 * z - Zero
 	 * @param [Q]
 	 * @returns {number} 0
 	 */
 	z = () => s(y()),
+
+	/**
+	 * a - Add
+	 * @param {boolean} A
+	 * @param {boolean} [B=A]
+	 * @returns {boolean}
+	 */
+	a = (A = z(), B = t()) => s(s(B), A),
 
 	/**
 	 * m - Member
@@ -132,7 +139,7 @@ const _ = (A) => A,
 	 * @param {number} [I=0] starting index
 	 * @returns {number} length of array A
 	 */
-	c = (A, I = z()) => i($(e(m(I, A))), $(I), () => c(A, s(s(), I))),
+	c = (A, I = z()) => i($(e(m(I, A))), $(I), () => c(A, a(I))),
 
 	/**
 	 * l - Less than
@@ -183,21 +190,21 @@ const _ = (A) => A,
 	p = (...F) => g(...v(...F)),
 
 	/**
-	 * d - Reduce from right, last parameter is the starting value
+	 * u - Reduce from right, last parameter is the starting value
 	 * @param {function} F function(value, accumulator)
 	 * @param A
 	 * @param B
 	 * @param C
 	 * @returns {*}
 	 */
-	d = (F, A, B, ...C) => F(A, k(C, () => d(F, B, ...C), $(B))),
+	u = (F, A, B, ...C) => F(A, k(C, () => u(F, B, ...C), $(B))),
 
 	/**
 	 * j - Create object from pairs of keys and values
 	 * @param {...array} P
 	 * @returns {object}
 	 */
-	j = (...P) => k(P, () => d((V, S) => ({...S, ...{[x(V)]: x(q(V))}}), ...P, j()), $({})),
+	j = (...P) => k(P, () => u((V, S) => ({...S, ...{[x(V)]: x(q(V))}}), ...P, j()), $({})),
 
 	/**
 	 * r - Curry
@@ -206,7 +213,7 @@ const _ = (A) => A,
 	 * @param A
 	 * @returns {function(*=): *}
 	 */
-	r = (F, N = z(), ...A) => (X) => i($(b(N)), () => r(F, s(t(), N), ...A, X), () => d(F, ...A, X)),
+	r = (F, N = d(), ...A) => (X) => i($(b(N, d())), () => r(F, s(t(), N), ...A, X), () => u(F, ...A, X)),
 
 	/**
 	 * h - Switch
@@ -217,5 +224,5 @@ const _ = (A) => A,
 	h = (C, ...R) => i(x(C), x(q(C)), () => k(R, () => h(...R)));
 
 module.exports = {
-	$, _, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, /*u,*/ v, w, x, y, z
+	$, _, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z
 };

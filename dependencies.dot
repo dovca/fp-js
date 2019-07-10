@@ -12,7 +12,8 @@ digraph dependencies {
     i -> _;
     w -> i;
     o -> n;
-    a -> n;
+    a -> z;
+    d -> a;
     s -> t;
     z -> s;
     z -> y;
@@ -32,10 +33,11 @@ digraph dependencies {
     f -> k;
     p -> g;
     p -> v;
-    d -> k;
-    j -> d;
+    u -> k;
+    j -> u;
     j -> q;
     r -> d;
+    r -> u;
     r -> b;
     h -> k;
     h -> q;
