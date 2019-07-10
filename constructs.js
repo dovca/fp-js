@@ -44,7 +44,7 @@ const _ = (A) => A,
 	 * t - True
 	 * @returns {boolean} true
 	 */
-	t = () => n(_()),
+	t = $(_(), n),
 
 	/**
 	 * i - If/else
@@ -57,11 +57,11 @@ const _ = (A) => A,
 
 	/**
 	 * w - While
-	 * @param {function: boolean} C function that returns the condition expression
-	 * @param {function} F function to call each iteration
+	 * @param {function: boolean} C function that return the condition expression
+	 * @param {function} [F=function: undefined] function to call each iteration
 	 * @returns {undefined}
 	 */
-	w = (C, F) => i(C, () => (F(), w(C, F))),
+	w = (C, F = _) => i(C, () => (F(), w(C, F))),
 
 	/**
 	 * o - Or
@@ -83,7 +83,7 @@ const _ = (A) => A,
 	 * z - Zero
 	 * @returns {number} 0
 	 */
-	z = () => s(y()),
+	z = $(y(), s),
 
 	/**
 	 * a - Add
@@ -136,7 +136,7 @@ const _ = (A) => A,
 	 * @param {number} [I=0] starting index
 	 * @returns {number} length of array A
 	 */
-	c = (A, I = z()) => i($(e(m(I, A))), $(I), () => c(A, a(I))),
+	c = (A, I = z()) => i($(m(I, A), e), $(I), () => c(A, a(I))),
 
 	/**
 	 * l - Less than
@@ -161,7 +161,7 @@ const _ = (A) => A,
 	 * @param {function} [F=function: undefined]
 	 * @returns {*} whatever T() or F() returns
 	 */
-	k = (A, T, F = _) => i($(e(x(A))), F, T),
+	k = (A, T, F = _) => i($(x(A), e), F, T),
 
 	/**
 	 * g - Compose functions

@@ -12,9 +12,11 @@
   },
   "scripts": {
     "test": "mocha",
-    "dependency-graph": "dot -Tpng -O dependencies.dot"
+    "dependency-graph": "dot -Tpng -O dependencies.dot",
+    "minify": "uglifyjs constructs.js --compress --ecma 8 -o constructs.min.js"
   },
   "dependencies": {
-    "sinon": "^7.3.2"
+    "sinon": "^7.3.2",
+    "uglify-es": "^3.3.9"
   }
 }
