@@ -1,6 +1,6 @@
 digraph dependencies {
 
-    { rank = same; n; e; x; "_"; q; y; l; m; }
+    { rank = sink; n; e; x; "_"; q; y; l; m; t; }
 
     n [style=filled];
     i [style=filled];
@@ -16,25 +16,23 @@ digraph dependencies {
     n;
     m;
     l;
+    t;
     i -> "_";
     "$" -> i;
     "$" -> e;
-    "$" -> x;
     w -> w -> i;
     o -> n;
-    s -> n;
     s -> e;
+    s -> o;
     z -> "$";
     z -> s;
-    z -> y;
     a -> s;
     d -> a;
-    c -> c -> "$";
-    c -> m;
-    c -> a;
-    b -> n;
+    c -> c -> a;
+    c -> z;
     b -> l;
     k -> "$";
+    k -> x;
     g -> g -> k;
     v -> v -> k;
     v -> y;
@@ -44,7 +42,7 @@ digraph dependencies {
     j -> j -> u;
     r -> r -> u;
     r -> d;
-    r -> b;
+    r -> l;
     h -> h -> k;
     p -> g;
     p -> v;
