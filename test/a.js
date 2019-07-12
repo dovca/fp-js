@@ -1,4 +1,4 @@
-const {a} = require('../constructs');
+const {a} = require('../functions');
 const assert = require('assert');
 
 describe('a - Add', function() {

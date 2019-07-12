@@ -1,4 +1,4 @@
-const {z} = require('../constructs');
+const {z} = require('../functions');
 const assert = require('assert');
 
 describe('z - Zero', function() {

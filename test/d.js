@@ -1,4 +1,4 @@
-const {d} = require('../constructs');
+const {d} = require('../functions');
 const assert = require('assert');
 
 describe('d - Double', function() {

@@ -1,13 +1,13 @@
 const repl = require('repl');
-const constructs = require('./constructs');
+const fn = require('./functions');
 
 const r = repl.start('> ');
 
-Object.keys(constructs).forEach((k) => {
+Object.keys(fn).forEach((k) => {
 	Object.defineProperty(r.context, k, {
 		configurable: false,
 		enumerable: true,
-		value: constructs[k]
+		value: fn[k]
 	});
 });
 

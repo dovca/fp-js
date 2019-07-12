@@ -1,4 +1,4 @@
-const {o} = require('../constructs');
+const {o} = require('../functions');
 const assert = require('assert');
 
 describe('o - Logical OR', function() {

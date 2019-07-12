@@ -13,7 +13,7 @@
   "scripts": {
     "test": "mocha",
     "dependency-graph": "dot -Tpng -O dependencies.dot",
-    "minify": "uglifyjs constructs.js --compress --ecma 8 | sed 's/()=>/Q=>/g' > constructs.min.js"
+    "minify": "uglifyjs functions.js --compress --ecma 8 | sed 's/()=>/Q=>/g' > functions.min.js"
   },
   "dependencies": {
     "sinon": "^7.3.2",

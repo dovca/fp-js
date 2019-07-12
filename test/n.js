@@ -1,4 +1,4 @@
-const {n} = require('../constructs');
+const {n} = require('../functions');
 const assert = require('assert');
 
 describe('n - Logical NOR', function() {

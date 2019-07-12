@@ -1,4 +1,4 @@
-const {v} = require('../constructs');
+const {v} = require('../functions');
 const assert = require('assert');
 
 describe('v - Reverse', function() {

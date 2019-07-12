@@ -1,4 +1,4 @@
-const {$} = require('../constructs');
+const {$} = require('../functions');
 const assert = require('assert');
 const randomer = require('../util/randomer');
 
