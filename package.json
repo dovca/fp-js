@@ -6,14 +6,17 @@
   "keywords": ["functional programming", "fp", "minimal"],
   "author": "dovca",
   "license": "ISC",
-  "devDependencies": {
-    "mocha": "^6.1.4",
+  "repository": "dovca/fp-js",
+  "dependencies": {
     "gulp": "^4.0.2",
     "gulp-clone": "^2.0.1",
     "gulp-preprocess": "^3.0.2",
     "gulp-rename": "^1.4.0",
     "gulp-replace": "^1.0.0",
-    "gulp-terser": "^1.2.0",
+    "gulp-terser": "^1.2.0"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4",
     "gulp-watch": "^5.0.1",
     "sinon": "^7.3.2"
   },
