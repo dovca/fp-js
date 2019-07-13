@@ -1,5 +1,5 @@
 module.exports = (functionsModuleName) => () => {
-	const {m} = require(`${__dirname}/../../dist/${functionsModuleName}`);
+	const {m} = require(`${__dirname}/../../lib/${functionsModuleName}`);
 	const assert = require('assert');
 
 	describe(`${functionsModuleName}/m - Member`, function () {

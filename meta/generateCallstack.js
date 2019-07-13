@@ -1,5 +1,5 @@
 const path = require('path');
-const {$, _, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, getDebugBuffer} = require(path.join(__dirname, '../dist/functions.debug'));
+const {$, _, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, getDebugBuffer} = require(path.join(__dirname, '../lib/functions.debug'));
 const {exec} = require('child_process');
 const {createHash} = require('crypto');
 const command = process.argv[2];

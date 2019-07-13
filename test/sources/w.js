@@ -1,5 +1,5 @@
 module.exports = (functionsModuleName) => () => {
-	const {w} = require(`${__dirname}/../../dist/${functionsModuleName}`);
+	const {w} = require(`${__dirname}/../../lib/${functionsModuleName}`);
 	const assert = require('assert');
 	const randomer = require(`${__dirname}/../../util/randomer`);
 	const sinon = require('sinon');

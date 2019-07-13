@@ -1,5 +1,5 @@
 module.exports = (functionsModuleName) => () => {
-	const {v} = require(`${__dirname}/../../dist/${functionsModuleName}`);
+	const {v} = require(`${__dirname}/../../lib/${functionsModuleName}`);
 	const assert = require('assert');
 
 	describe(`${functionsModuleName}/v - Reverse`, function () {

@@ -1,5 +1,5 @@
 module.exports = (functionsModuleName) => () => {
-	const {q} = require(`${__dirname}/../../dist/${functionsModuleName}`);
+	const {q} = require(`${__dirname}/../../lib/${functionsModuleName}`);
 	const assert = require('assert');
 
 	describe(`${functionsModuleName}/q - Dequeue`, function () {

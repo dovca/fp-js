@@ -1,5 +1,5 @@
 const repl = require('repl');
-const fn = require('./dist/functions.debug');
+const fn = require('./lib/functions.debug');
 
 const r = repl.start('> ');
 

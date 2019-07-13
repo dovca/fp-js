@@ -1,5 +1,5 @@
 module.exports = (functionsModuleName) => () => {
-	const {k} = require(`${__dirname}/../../dist/${functionsModuleName}`);
+	const {k} = require(`${__dirname}/../../lib/${functionsModuleName}`);
 	const assert = require('assert');
 	const sinon = require('sinon');
 

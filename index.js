@@ -1,1 +1,1 @@
-module.exports = require('./dist/functions');
+module.exports = require('./lib/functions');

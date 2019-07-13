@@ -6,7 +6,7 @@ const gulpRename = require('gulp-rename');
 const gulpReplace = require('gulp-replace');
 
 const PATH_SRC = './src';
-const PATH_DIST = './dist';
+const PATH_DIST = './lib';
 
 const SRC_GLOB_MODULES = `${PATH_SRC}/modules/*.js`;
 const SRC_GLOB_ALL = `${PATH_SRC}/**/*.js`;

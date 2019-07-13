@@ -1,5 +1,5 @@
 module.exports = (functionsModuleName) => () => {
-	const {o} = require(`${__dirname}/../../dist/${functionsModuleName}`);
+	const {o} = require(`${__dirname}/../../lib/${functionsModuleName}`);
 	const assert = require('assert');
 
 	describe(`${functionsModuleName}/o - Logical OR`, function () {
