@@ -4,7 +4,7 @@
   "description": "Minimal functional programming in JavaScript",
   "main": "index.js",
   "keywords": ["functional programming", "fp", "minimal"],
-  "author": "github.com/dovca",
+  "author": "dovca",
   "license": "ISC",
   "devDependencies": {
     "mocha": "^6.1.4",
