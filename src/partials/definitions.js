@@ -178,8 +178,8 @@ l = (A, B = O) => A < B;
 b = (A, B = O) => l(B, A);
 
 /**
- * k - If array is not empty
- * @param {*[]} A array
+ * k - If array or string is not empty
+ * @param {*[]|string} A array or string
  * @param {function(): *} T function to execute if A is not empty
  * @param {function(): *} [F=function(): undefined] function to execute if A is empty
  * @returns {*} whatever T() or F() returns
