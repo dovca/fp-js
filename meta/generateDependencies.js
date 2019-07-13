@@ -1,5 +1,6 @@
 const fs = require('fs');
-const definitionsPath = `${__dirname}/../partials/definitions.js`;
+const path = require('path');
+const definitionsPath = path.join(__dirname, '../src/partials/definitions.js');
 const operatorRegex = /[-?!^%+*/<&|]|={2,}|(?<!=)>/;
 const lines = fs.readFileSync(definitionsPath).toString().split('\n');
 const cachedValues = lines
@@ -18,7 +19,6 @@ const isADependentOnB = (a, b) => {
 	const cacheKey = `${a}${b}`;
 
 	if (!dependencyCache.has(cacheKey)) {
-		const cacheKeyInverse = `${b}${a}`;
 		dependencyCache.set(cacheKey, [...dependenciesOf(a)].includes(b));
 	}
 

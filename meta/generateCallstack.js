@@ -1,11 +1,12 @@
-const {$, _, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, getDebugBuffer} = require(`${__dirname}/../../dist/functions.debug`);
-const {exec} = require('child_process');
 const path = require('path');
+const {$, _, a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z, getDebugBuffer} = require(path.join(__dirname, '../dist/functions.debug'));
+const {exec} = require('child_process');
 const {createHash} = require('crypto');
 const command = process.argv[2];
 const commandHash = createHash('sha1').update(command).digest('hex').slice(0, 8);
 const commandSlug = `${command.replace(/[^$_a-z]/g, '')}-${commandHash}`;
-const outputPath = path.join(__dirname, `../../output/callstack-${commandSlug}.svg`);
+const outputDirectory = path.join(__dirname, `../output`);
+const outputPath = path.join(outputDirectory, `callstack-${commandSlug}.svg`);
 
 eval(command);
 
@@ -51,7 +52,7 @@ plot $data using 1:2 w steps lc rgb "red", \
     $data using (0.5+$1):2:3 w labels offset char 0, 0.5
 `;
 
-exec(`echo '${gnuplotCommands.replace('\n', '\\\n')}' | gnuplot`, (error, stdout, stderr) => {
+exec(`mkdir -p ${outputDirectory} && echo '${gnuplotCommands.replace('\n', '\\\n')}' | gnuplot`, (error, stdout, stderr) => {
 	if (error) {
 		console.log(error, stderr.toString());
 	} else {
