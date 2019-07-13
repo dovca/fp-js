@@ -1,23 +1,13 @@
 {
   "name": "fp-js",
   "version": "1.0.0",
-  "description": "",
+  "description": "Minimal functional programming in JavaScript",
   "main": "index.js",
-  "keywords": [],
-  "author": "",
+  "keywords": ["functional programming", "fp", "minimal"],
+  "author": "github.com/dovca",
   "license": "ISC",
   "devDependencies": {
-    "faker": "^4.1.0",
-    "mocha": "^6.1.4"
-  },
-  "scripts": {
-    "clean": "rm -rf dist output",
-    "development": "gulp js",
-    "test": "mocha --exclude test/sources",
-    "dependency-graph": "node meta/generateDependencies.js",
-    "predependency-graph": "mkdir -p output"
-  },
-  "dependencies": {
+    "mocha": "^6.1.4",
     "gulp": "^4.0.2",
     "gulp-clone": "^2.0.1",
     "gulp-preprocess": "^3.0.2",
@@ -25,7 +15,13 @@
     "gulp-replace": "^1.0.0",
     "gulp-terser": "^1.2.0",
     "gulp-watch": "^5.0.1",
-    "sinon": "^7.3.2",
-    "uglify-es": "^3.3.9"
+    "sinon": "^7.3.2"
+  },
+  "scripts": {
+    "clean": "rm -rf dist output",
+    "development": "gulp js",
+    "test": "mocha --exclude test/sources",
+    "dependency-graph": "node meta/generateDependencies.js",
+    "predependency-graph": "mkdir -p output"
   }
 }
