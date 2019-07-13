@@ -12,7 +12,9 @@ const record = (name) =>  {
 
 const wrap = (fn, name) => (...args) => {
 	record(name);
-	return fn(...args);
+	const result = fn(...args);
+	record('-');
+	return result;
 };
 
 module.exports = {

@@ -11,6 +11,7 @@
     "mocha": "^6.1.4"
   },
   "scripts": {
+    "development": "gulp js",
     "test": "mocha --exclude test/sources",
     "dependency-graph": "node src/meta/generateDependencies.js | dot -Tpng > dependencies.png"
   },
