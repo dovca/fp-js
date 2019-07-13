@@ -13,7 +13,7 @@
   "scripts": {
     "development": "gulp js",
     "test": "mocha --exclude test/sources",
-    "dependency-graph": "node src/meta/generateDependencies.js | dot -Tpng > dependencies.png"
+    "dependency-graph": "node src/meta/generateDependencies.js | dot -Tpng > output/dependencies.png"
   },
   "dependencies": {
     "gulp": "^4.0.2",
