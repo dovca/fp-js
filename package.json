@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "mocha --exclude test/sources",
-    "dependency-graph": "dot -Tpng -O dependencies.dot"
+    "dependency-graph": "node src/meta/generateDependencies.js | dot -Tpng > dependencies.png"
   },
   "dependencies": {
     "gulp": "^4.0.2",
