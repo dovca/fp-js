@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const {exec} = require('child_process');
 const definitionsPath = path.join(__dirname, '../src/partials/definitions.js');
 const operatorRegex = /[-?!^%+*/<&|]|={2,}|(?<!=)>/;
 const lines = fs.readFileSync(definitionsPath).toString().split('\n');
@@ -15,6 +16,7 @@ const definitionLines = lines
 const functionCodes = new Map();
 const dependencyCache = new Map();
 const dependencyStorage = new Map();
+const inverseDependencyStorage = new Map();
 const isADependentOnB = (a, b) => {
 	const cacheKey = `${a}${b}`;
 
@@ -31,6 +33,13 @@ const dependenciesOf = (a) => {
 		: dependencies;
 };
 
+const inverseDependenciesOf = (a) => {
+	const dependencies = inverseDependencyStorage.get(a);
+	return dependencies.size
+		? new Set([...dependencies, ...[...dependencies].reduce((s, v) => v === a ? s : [...s, ...inverseDependenciesOf(v)], [])])
+		: dependencies;
+};
+
 for (const line of definitionLines) {
 	const functionName = line.charAt(0);
 	const functionCode = line.replace(/^[$_\w\s=]+\s/, '');
@@ -38,7 +47,21 @@ for (const line of definitionLines) {
 
 	dependencyStorage.set(functionName, dependencies);
 	functionCodes.set(functionName, functionCode);
+
+	if (!inverseDependencyStorage.has(functionName)) {
+		inverseDependencyStorage.set(functionName, new Set());
+	}
+
+	for (const dep of dependencies) {
+		if (!inverseDependencyStorage.has(dep)) {
+			inverseDependencyStorage.set(dep, new Set());
+		}
+		inverseDependencyStorage.get(dep).add(functionName);
+	}
 }
+
+const deepDependencyStorageSource = `new Map([${[...dependencyStorage].map(([f]) => `["${f}", new Set([${[...dependenciesOf(f)].map((fn) => `"${fn}"`)}])]`).join(',\n')}])`;
+const deepInverseDependencyStorageSource = `new Map([${[...inverseDependencyStorage].map(([f]) => `["${f}", new Set([${[...inverseDependenciesOf(f)].map((fn) => `"${fn}"`)}])]`).join(',\n')}])`;
 
 for (const [functionName, dependencies] of dependencyStorage) {
 	for (const a of dependencies) {
@@ -61,10 +84,31 @@ for (const [functionName, dependencies] of dependencyStorage) {
 const independentFunctions = [...dependencyStorage.keys()].filter((k) => !dependencyStorage.get(k).size);
 const operatorUsingFunctions = [...functionCodes.keys()].filter((k) => operatorRegex.test(functionCodes.get(k)));
 const q = (str) => `"${str}"`;
-
-process.stdout.write(`digraph dependencies {
+const dotSourceCode = `digraph dependencies {
 	{ rank=sink; ${independentFunctions.map(q).join(';')} }
-	${operatorUsingFunctions.map((f) => `"${f}"[style=filled]`).join(';')}
+	${operatorUsingFunctions.map((f) => `"${f}"[shape=rectangle]`).join(';')}
 	${[...dependencyStorage].map(([f, d]) => d.size ? [...d].map((v) => `${q(f)}->${q(v)}`).join(';') : `${q(f)}`).join(';')}
-}
-`);
+}`;
+
+exec(`echo '${dotSourceCode}' | dot -Tsvg`, (error, stdout, stderr) => {
+	if (error) {
+		console.log(error, stderr);
+		return;
+	}
+
+	const svgScriptPartial = fs.readFileSync(path.join(__dirname, '../src/partials/dependencyGraphScript.js')).toString();
+	const svgStylePartial = fs.readFileSync(path.join(__dirname, '../src/partials/dependencyGraphStyle.css')).toString();
+
+	const finalSvgCode = stdout.replace(
+		'</svg>',
+		`<style>${svgStylePartial}</style>
+		<script id="graph-dependencies-script">
+			var dependencies = ${deepDependencyStorageSource};
+			var inverseDependencies = ${deepInverseDependencyStorageSource};
+			${svgScriptPartial}
+		</script>
+		</svg>`
+	);
+
+	fs.writeFileSync(path.join(__dirname, '../output/dependencies.svg'), finalSvgCode);
+});

@@ -14,7 +14,8 @@
     "clean": "rm -rf dist output",
     "development": "gulp js",
     "test": "mocha --exclude test/sources",
-    "dependency-graph": "mkdir -p output && node meta/generateDependencies.js | dot -Tsvg > output/dependencies.svg"
+    "dependency-graph": "node meta/generateDependencies.js",
+    "predependency-graph": "mkdir -p output"
   },
   "dependencies": {
     "gulp": "^4.0.2",

@@ -1,0 +1,29 @@
+.node {
+    pointer-events: all;
+    cursor: default;
+}
+
+.node ellipse,
+.node polygon {
+    fill: transparent;
+    -webkit-transition: fill 0.4s;
+    -o-transition: fill 0.4s;
+    transition: fill 0.4s;
+}
+
+.node.selected ellipse,
+.node.selected polygon {
+    -webkit-transition-duration: 0.2s;
+    -o-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+}
+
+.node.selected.blue ellipse,
+.node.selected.blue polygon {
+    fill: #84b6c4 !important;
+}
+
+.node.selected.red ellipse,
+.node.selected.red polygon {
+    fill: #ff3856 !important;
+}

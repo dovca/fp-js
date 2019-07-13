@@ -28,8 +28,6 @@ const outputSize = [
 	Math.min(Math.max(400, (maxDepth + 1) * 10 + 100), 1000)
 ];
 
-
-
 const gnuplotCommands = `
 $data << EOD
 ${plotData.join('\n')}
