@@ -19,9 +19,11 @@
   },
   "scripts": {
     "clean": "rm -rf dist output",
-    "development": "gulp js",
+    "build": "gulp build",
+    "development": "gulp default",
     "test": "mocha --exclude test/sources",
     "dependency-graph": "node meta/generateDependencies.js",
-    "predependency-graph": "mkdir -p output"
+    "predependency-graph": "mkdir -p output",
+    "install": "gulp build"
   }
 }

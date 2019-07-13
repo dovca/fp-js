@@ -11,7 +11,7 @@ const PATH_DIST = './dist';
 const SRC_GLOB_MODULES = `${PATH_SRC}/modules/*.js`;
 const SRC_GLOB_ALL = `${PATH_SRC}/**/*.js`;
 
-gulp.task('js', () => {
+gulp.task('build', () => {
 	const clone	= gulpClone.sink();
 
 	return gulp
@@ -25,4 +25,8 @@ gulp.task('js', () => {
 		.pipe(gulp.dest(`${PATH_DIST}`));
 });
 
-gulp.watch(SRC_GLOB_ALL, gulp.series(['js']));
+gulp.task('watch', () => {
+	return gulp.watch(SRC_GLOB_ALL, gulp.series(['build']));
+});
+
+gulp.task('default', gulp.series(['build', 'watch']));
