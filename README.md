@@ -225,12 +225,76 @@ Examples:
 p(d, a, d, a)(9) // -> 39 (equals to (((9*2)+1)*2)+1 using functions `a` and `d` from this package)
 p((A) => A.split(''), (A) => A.reverse(), (A) => A.shift())('foobar') // -> 'r'
 ```
-//TODO
-* `q` - Dequeue 
-* `r` - Curry
-* `s` - Subtract
-* `t` - Concatenate
-* `u` - Reduce
+
+### `q` - Dequeue
+`q(A)` returns a copy of array `A` with the first element removed.
+
+Examples:
+```js
+q([1, 2, 3]) // -> [2, 3]
+q(['foo']) // -> []
+q([]) // -> []
+```  
+
+### `r` - Curry
+`r(F, N)` returns a [curried](https://en.wikipedia.org/wiki/Currying) `N`-ary function `F`. If argument `N` is omitted, it defaults to 2 making it easy to curry binary functions.
+
+Examples:
+```js
+const add = r((A, B) => A + B); // -> (A) => (B) => A + B
+add(1)(2) // -> 3
+add(12)(34) // -> 46
+
+const addTwo = add(2); // -> (B) => 2 + B
+addTwo(1) // -> 3
+addTwo(42) // -> 44
+
+const xyz = r((X, Y, Z) => X + Y * Z, 3);
+xyz(2)(3)(4) // -> 14
+xyz(2)(3)(10) // -> 32
+
+const x2y3z = xyz(2)(3) // -> (Z) => 2 + 3 * Z
+// even though Y * Z has priority in the curried function and should evaluate first, x2y3z can exist without Z)
+
+x2y3z(4) // -> 14
+x2y3z(10) // -> 32
+```
+
+### `s` - Subtract
+`s(A, B)` subtracts `B` from `A` and returns the result. If argument `A` is omitted, it defaults to 0. If argument `B` is omitted, it defaults to 1.
+
+Examples:
+```js
+s() // -> -1
+s(5) // -> 4
+s(5, 3) // -> 2
+s(1, -1) // -> 2
+```
+
+### `t` - Concatenate
+`t(A, ...B)` returns a copy of array `A` with elements `...B` appended to it.
+
+Examples:
+```js
+t([]) // -> []
+t([1]) // -> [1]
+t([1, 2], 3, 4) // -> [1, 2, 3, 4]
+```
+
+### `u` - Reduce
+`u(F, ...A)` applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. Last element of `...A` is the initial accumulator value. If `...A` contains only a single value, it is returned unmodified and `F` is not called. If `...A` is empty, `undefined` is returned.
+
+Examples:
+```js
+u(a, 1, 2, 3, 4, 5) // -> 15 (using function `a` from this package)
+u((S, V) => Math.max(S, V), -2, 0, 15, -9, 42, 8, -40) // -> 42 (finds the largest value)
+u((A, B) => `${A} ${B}`, 'foo', 'bar', 'baz'); // -> 'foo bar baz'
+
+u(a, 3) // -> 3 (nothing to reduce, this only initialized the accumulator)
+u(a) // -> undefined (the accumulator wasn't even initialized)
+u() // -> undefined (duh...)
+```
+
 * `v` - Reverse
 * `w` - While
 * `x` - Extract
