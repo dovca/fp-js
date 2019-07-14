@@ -3,7 +3,6 @@
 The goal of this package is to provide a set of functions whose combinations can be used to write any synchronous JS logic. These functions are written _without any keywords, strings, numbers or array literals_ using as few JS operators as possible.
 
 JavaScript operators currently used: 
-* `,`
 * `-`
 * `!`
 * `<`
@@ -13,7 +12,7 @@ JavaScript operators currently used:
 * `() - grouping`
 * `() - function call`
 
-Which is only **15.25%** of [all the operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) that Javascript offers!
+Which is only **13.56%** of [all the operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) that Javascript offers!
 
 ## What does it contain?
 
@@ -82,7 +81,7 @@ c(['foo', 'bar']) // -> 2
 c([, , 42]) // -> 0
 c([1, 1, , , 3, 3]) // -> 2
 c('') // -> 0
-c('foobar') // -> 6
+c('donkey') // -> 6
 ```
 
 ### `d` - Double
@@ -143,7 +142,7 @@ h(
  ```js
 i(() => true, () => 'foo', () => 'bar') // -> 'foo'
  
-const password = 'foobar';
+const password = 'donkey';
 i(() => password.length > 8, () => 'Good.', () => 'Too short.') // -> 'Too short.'
 
 i(() => 69 < 42, () => 420) // -> undefined (no false branch supplied)
@@ -191,7 +190,7 @@ l(2, 1) // -> false
 Examples:
 ```js
 m(0, [10, 20, 30]) // -> 10
-m(3, 'foobar') // -> 'b'
+m(3, 'donkey') // -> 'k'
 m('foo', {foo: 'bar'}) // -> 'bar'
 ```
 
@@ -295,9 +294,41 @@ u(a) // -> undefined (the accumulator wasn't even initialized)
 u() // -> undefined (duh...)
 ```
 
-* `v` - Reverse
-* `w` - While
-* `x` - Extract
+### `v` - Reverse
+`v(...A)` returns an array filled with values of `...A` in reversed order.
+
+Examples:
+```js
+v() // -> [undefined]
+v(0) // -> [0]
+v(1, 2, 3) // -> [3, 2, 1]
+v('donkey') // -> ['donkey']
+v(...'donkey').join('') // -> 'yeknod'
+```
+
+### `w` - While
+`w(C, F)` calls function `F` repeatedly as long as `C()` returns a [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) value. `w()` returns the return value of the last call to `F`.
+
+Examples:
+```js
+let A = 0, B = 0;
+w(() => A < 5, () => (console.log(A), A++)) // -> 4 (and logs 0, 1, 2, 3, 4)
+w(() => B < 5, () => (console.log(B), ++B)) // -> 5 (and logs 0, 1, 2, 3, 4)
+w(() => false, () => (console.log('foo'), 'bar')) // -> undefined (and nothing is logged)
+w(() => true, () => console.log('donkey')) // -> throws RangeError: Maximum call stack size exceeded (this will print so many donkeys though...)
+```
+
+### `x` - Extract
+`x(A)` returns the first element of array `A`. If `A` is a string, its first character is returned.
+
+Examples:
+```js
+x([]) // -> undefined
+x('') // -> undefined
+x([3, 2, 1]) // -> 3
+x('hello world') // -> 'h'
+```
+
 * `y` - Create array
 * `z` - Zero
 
