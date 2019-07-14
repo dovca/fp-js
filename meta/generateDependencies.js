@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const {exec} = require('child_process');
 const definitionsPath = path.join(__dirname, '../src/partials/definitions.js');
-const operatorRegex = /[-?!^%+*/<&|]|={2,}|(?<!=)>/;
 const lines = fs.readFileSync(definitionsPath).toString().split('\n');
 const cachedValues = lines
 	.filter((line) => /^[A-Z] = /.test(line))
@@ -49,7 +48,7 @@ const inverseDependenciesOf = (a) => {
 for (const line of definitionLines) {
 	const functionName = line.charAt(0);
 	const functionCode = line.replace(/^[$_\w\s=]+\s/, '');
-	const dependencies = new Set([...functionCode.replace(/[^$_a-z]/g, '')]);
+	const dependencies = new Set([...functionCode.replace(/\/\/.*|[^$_a-z]/g, '')]);
 
 	dependencyStorage.set(functionName, dependencies);
 	functionCodes.set(functionName, functionCode);
@@ -88,7 +87,7 @@ for (const [functionName, dependencies] of dependencyStorage) {
 }
 
 const independentFunctions = [...dependencyStorage.keys()].filter((k) => !dependencyStorage.get(k).size);
-const operatorUsingFunctions = [...functionCodes.keys()].filter((k) => operatorRegex.test(functionCodes.get(k)));
+const operatorUsingFunctions = [...functionCodes.keys()].filter((k) => functionCodes.get(k).includes('//operator'));
 const q = (str) => `"${str}"`;
 
 //Possibly include { rank=sink; ${independentFunctions.map(q).join(';')} }

@@ -45,7 +45,7 @@ m = (A, {[A]: B}) => B;
  * @param {*} [B] second value
  * @returns {boolean} true if A is strictly equal to B, false otherwise
  */
-e = (A, B) => A === B;
+e = (A, B) => A === B; //operator ===
 
 /**
  * Cached value of true
@@ -90,7 +90,7 @@ $ = (F, A, ...B) => () => i(() => e(A), () => F, () => F(A, ...B));
  * @param {boolean} [B=A]
  * @returns {boolean} negation of A if parameter B is omitted, A NOR B otherwise
  */
-n = (A, B = A) => !(A || B);
+n = (A, B = A) => !(A || B); //operator ! and ||
 
 /**
  * o - Logical OR
@@ -127,7 +127,7 @@ i = (C, T, F = _) => m(z(o(C())), y(F, T))();
  * @param {function} F function to call each iteration
  * @returns {undefined} nothing
  */
-w = (C, F) => i(C, () => (F(), w(C, F)));
+w = (C, F) => i(C, () => (F(), w(C, F))); //operator ,
 
 /**
  * s - Subtract
@@ -135,7 +135,7 @@ w = (C, F) => i(C, () => (F(), w(C, F)));
  * @param {numeric} [B=false] value to subtract from
  * @returns {number} B - A
  */
-s = (A = E, B = O) => B - A;
+s = (A = E, B = O) => B - A; //operator -
 
 /**
  * a - Add
@@ -167,7 +167,7 @@ c = ([A, ...B], I = z()) => i($(e, A), $(I), $(c, B, a(I)));
  * @param {numeric} [B=false] second value
  * @returns {boolean} true if A is less than or equal to B, false otherwise
  */
-l = (A, B = O) => A < B;
+l = (A, B = O) => A < B; //operator <
 
 /**
  * b - Compare bigger
@@ -237,12 +237,12 @@ j = (...P) => k(P, $(u, ([K, V], S) => ({...S, [K]: V}), ...P, j), $({}));
 
 /**
  * r - Curry
- * @param {function(*=): *} F curried function
+ * @param {function: *} F curried function
  * @param {numeric} [N=2] depth of currying
  * @param {...*} A (reserved for internal use)
  * @returns {function(*=): *}
  */
-r = (F, N = d(), ...A) => (X) => i($(l, N, d()), $(u, F, ...A, X), $(r, F, s(E, N), ...A, X));
+r = (F, N = d(), ...A) => (X) => i($(l, N, d()), $(F, ...A, X), $(r, F, s(E, N), ...A, X));
 
 /**
  * h - Switch
