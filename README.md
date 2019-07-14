@@ -1,6 +1,19 @@
 ## What is this package about?
 
-The goal of this package is to provide a set of functions whose combinations can be used to write any synchronous JS logic. These functions are written without any keywords, strings, numbers or array literals using as few JS operators as possible.
+The goal of this package is to provide a set of functions whose combinations can be used to write any synchronous JS logic. These functions are written _without any keywords, strings, numbers or array literals_ using as few JS operators as possible.
+
+JavaScript operators currently used: 
+* `,`
+* `-`
+* `!`
+* `<`
+* `=`
+* `||`
+* `===`
+* `() - grouping`
+* `() - function call`
+
+Which is only **15.25%** of [all the operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) that Javascript offers!
 
 ## What does it contain?
 

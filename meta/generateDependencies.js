@@ -90,8 +90,10 @@ for (const [functionName, dependencies] of dependencyStorage) {
 const independentFunctions = [...dependencyStorage.keys()].filter((k) => !dependencyStorage.get(k).size);
 const operatorUsingFunctions = [...functionCodes.keys()].filter((k) => operatorRegex.test(functionCodes.get(k)));
 const q = (str) => `"${str}"`;
+
+//Possibly include { rank=sink; ${independentFunctions.map(q).join(';')} }
 const dotSourceCode = `digraph "" {
-	{ rank=sink; ${independentFunctions.map(q).join(';')} }
+	
 	${[...tooltips].map(([k, v]) => `"${k}"[tooltip="${v}"]`).join(';')}
 	${operatorUsingFunctions.map((f) => `"${f}"[shape=rectangle]`).join(';')}
 	${[...dependencyStorage].map(([f, d]) => d.size ? [...d].map((v) => `${q(f)}->${q(v)}`).join(';') : `${q(f)}`).join(';')}
