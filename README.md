@@ -136,7 +136,7 @@ h(
 ```
 
 ### `i` - If/else
- `i(C, T, F)` behaves like the native if/else statement. It calls function `T` if the call `C()` returns a [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) value. If not, function `F` is called instead. The call to function `i` returns whatever `T()` or `F()` returns. If argument `F` is omitted, it defaults to a function that returns `undefined`.
+ `i(C, T, F)` behaves like the native `if/else` statement. It calls function `T` if the call `C()` returns a [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) value. If not, function `F` is called instead. The call to function `i` returns whatever `T()` or `F()` returns. If argument `F` is omitted, it defaults to a function that returns `undefined`.
  
  Examples:
  ```js
