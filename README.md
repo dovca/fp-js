@@ -225,7 +225,7 @@ Examples:
 p(d, a, d, a)(9) // -> 39 (equals to (((9*2)+1)*2)+1 using functions `a` and `d` from this package)
 p((A) => A.split(''), (A) => A.reverse(), (A) => A.shift())('foobar') // -> 'r'
 ```
-
+//TODO
 * `q` - Dequeue 
 * `r` - Curry
 * `s` - Subtract
@@ -236,3 +236,11 @@ p((A) => A.split(''), (A) => A.reverse(), (A) => A.shift())('foobar') // -> 'r'
 * `x` - Extract
 * `y` - Create array
 * `z` - Zero
+
+## How does it work?
+
+This is the function dependency graph:
+
+![Dependecy graph](https://raw.githubusercontent.com/dovca/fp-js/master/dependencies.svg?sanitize=true)
+
+Functions with rectangular nodes use operators that could possibly be removed. Download the raw image and open locally in your web browser for bonus interactivity!
