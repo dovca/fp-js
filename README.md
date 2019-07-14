@@ -95,7 +95,7 @@ d(-10) // -> -20
 ```
 
 ### `e` - Compare equal
-`e(A, B)` returns `true` _iff_ `A` is strictly equal to `B`, that is `A === B`. See this [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators# Identity) for details.
+`e(A, B)` returns `true` _iff_ `A` is strictly equal to `B`, that is `A === B`. See this [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators#Identity) for details.
 
 Examples:
 ```js
