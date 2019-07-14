@@ -1,6 +1,6 @@
 ## What is this package about?
 
-The goal of this package is to supply a set of functions whose combinations can be used to write any synchronous JS logic. These functions are written without any keywords, strings, numbers using as few JS operators as possible.
+The goal of this package is to provide a set of functions whose combinations can be used to write any synchronous JS logic. These functions are written without any keywords, strings, numbers using as few JS operators as possible.
 
 ## What does it contain?
 
