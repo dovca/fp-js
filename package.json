@@ -32,6 +32,7 @@
     "test": "mocha --exclude test/sources",
     "pretest": "npm run clean && npm run build",
     "dependency-graph": "node meta/generateDependencies.js",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "prepublish": "npm run dependency-graph"
   }
 }
