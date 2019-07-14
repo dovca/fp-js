@@ -329,8 +329,28 @@ x([3, 2, 1]) // -> 3
 x('hello world') // -> 'h'
 ```
 
-* `y` - Create array
-* `z` - Zero
+### `y` - Create array
+`y(...A)` return an array filled with values of `...A`.
+
+Examples:
+```js
+y() // -> []
+y(1) // -> [1]
+y(0, 7, 42, 69, 88, 420, 1337, 9001) // -> [0, 7, 42, 69, 88, 420, 1337, 9001]
+y(...'donkey') // -> ['d', 'o', 'n', 'k', 'e', 'y']
+```
+
+### `z` - Zero
+`z(A)` returns `A` converted to number. If argument `A` is omitted, it defaults to `false`, thus returning 0.
+
+Examples:
+```js
+z() // -> 0
+z(true) // -> 1
+z(-5) // -> -5
+z(5) // -> 5
+z('5') // -> 5
+```
 
 ## How does it work?
 
@@ -338,4 +358,4 @@ This is the function dependency graph:
 
 ![Dependecy graph](https://raw.githubusercontent.com/dovca/fp-js/master/dependencies.svg?sanitize=true)
 
-Functions with rectangular nodes use operators that could possibly be removed. Download the raw image and open locally in your web browser for bonus interactivity!
+Functions with rectangular nodes use operators that could possibly be removed or refactored. Clone the project and open the graph locally in your browser for bonus interactivity!
