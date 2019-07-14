@@ -9,7 +9,7 @@ const cachedValues = lines
 const definitionLines = lines
 	.filter((line) => /^[$_a-z] = /.test(line))
 	.map((line) => cachedValues.reduce(
-		(s, v) => s.replace(new RegExp(v, 'g'), v.toLowerCase()), //Replace cached values with their functions
+		(s, v) => s.replace(new RegExp(v, 'g'), `${v.toLowerCase()}()`), //Replace cached values with their functions
 		line
 	));
 const tooltips = new Map(

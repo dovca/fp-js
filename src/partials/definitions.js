@@ -110,7 +110,7 @@ O = o();
  * z - Zero
  * @returns {number} 0
  */
-z = (A = O) => s(O, A);
+z = (A = O) => s(A, O);
 
 /**
  * i - If/else
@@ -135,7 +135,7 @@ w = (C, F) => i(C, () => (F(), w(C, F))); //operator ,
  * @param {numeric} [B=false] value to subtract from
  * @returns {number} B - A
  */
-s = (A = E, B = O) => B - A; //operator -
+s = (A = O, B = E) => A - B; //operator -
 
 /**
  * a - Add
@@ -143,7 +143,7 @@ s = (A = E, B = O) => B - A; //operator -
  * @param {numeric} [B=true] value to add
  * @returns {number} A + B
  */
-a = (A = O, B = E) => s(s(B), A);
+a = (A = O, B = E) => s(A, s(O, B));
 
 /**
  * d - Double
@@ -242,7 +242,7 @@ j = (...P) => k(P, $(u, ([K, V], S) => ({...S, [K]: V}), ...P, j), $({}));
  * @param {...*} A (reserved for internal use)
  * @returns {function(*=): *}
  */
-r = (F, N = d(), ...A) => (X) => i($(l, N, d()), $(F, ...A, X), $(r, F, s(E, N), ...A, X));
+r = (F, N = d(), ...A) => (X) => i($(l, N, d()), $(F, ...A, X), $(r, F, s(N), ...A, X));
 
 /**
  * h - Switch
