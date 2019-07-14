@@ -3,8 +3,8 @@ var nodeCollection = scriptElement.parentElement.querySelectorAll('.node');
 var addClass = function (element, cls) {
 	cls.split(/\s+/).forEach(function (c) {
 		var currentClass = element.getAttribute('class');
-		if (currentClass.indexOf(cls) === -1) {
-			element.setAttribute('class', currentClass + ' ' + cls);
+		if (currentClass.indexOf(c) === -1) {
+			element.setAttribute('class', currentClass + ' ' + c);
 		}
 	});
 };
@@ -75,7 +75,7 @@ document.onkeyup = function(e) {
 	}
 };
 
-[].forEach.call(nodeCollection, function (nodeElement, i) {
+[].forEach.call(nodeCollection, function (nodeElement) {
 	var nodeName = getNodeName(nodeElement);
 	var nodeDependencies = new Set([nodeElement]);
 	var inverseNodeDependencies = new Set([nodeElement]);
@@ -92,7 +92,7 @@ document.onkeyup = function(e) {
 		inverseDependencies: inverseNodeDependencies
 	});
 
-	nodeElement.onmouseenter = function (e) {
+	nodeElement.onmouseenter = function () {
 		if (isShiftPressed) {
 			highlight(nodeElement, inverseNodeDependencies, highlightColors.parents);
 		} else {
@@ -100,7 +100,7 @@ document.onkeyup = function(e) {
 		}
 
 	};
-	nodeElement.onmouseleave = function (e) {
+	nodeElement.onmouseleave = function () {
 		highlight(false);
 	};
 });
