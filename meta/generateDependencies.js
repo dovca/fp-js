@@ -119,5 +119,5 @@ exec(`echo '${dotSourceCode}' | dot -Tsvg`, (error, stdout, stderr) => {
 		</svg>`
 	);
 
-	fs.writeFileSync(path.join(__dirname, '../output/dependencies.svg'), finalSvgCode);
+	fs.writeFileSync(path.join(__dirname, '../dependencies.svg'), finalSvgCode);
 });

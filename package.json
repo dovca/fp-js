@@ -26,13 +26,12 @@
     "sinon": "^7.3.2"
   },
   "scripts": {
-    "clean": "rm -rf lib output",
+    "clean": "rm -rf output",
     "build": "gulp build",
     "development": "gulp default",
     "test": "mocha --exclude test/sources",
     "pretest": "npm run clean && npm run build",
     "dependency-graph": "node meta/generateDependencies.js",
-    "predependency-graph": "mkdir -p output",
     "prepare": "npm run build"
   }
 }
