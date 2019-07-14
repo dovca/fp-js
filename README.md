@@ -6,7 +6,7 @@ The goal of this package is to supply a set of functions whose combinations can 
 
 This package provides 28 single-letter-named functions:
 
-### `$` - Function wrap
+### `$` - Wrap
 This function has two signatures and behaviors:
 
 * `$(A)`
@@ -23,7 +23,7 @@ $() // -> () => undefined
 $(42) // -> () => 42
 $((A, B) => A.concat(B), 'foo', 'bar') // -> () => 'foo'.concat('bar') 
 ```
-### `_` - Identity function
+### `_` - Identity
 `_(A)` returns whatever was passed into it, that means `_(A) === A`.
 
 Examples:
@@ -35,7 +35,7 @@ const a = {foo: 'bar'};
 _(a) // -> {foo: 'bar'} which is strictly equal to `a`
 ```
 
-### `a` - Arithmetic addition
+### `a` - Add
 `a(A, B)` returns the sum of its arguments, that is `a(A, B) === A + B`. If argument `A` is omitted, it defaults to 0. If argument `B` is omitted, it defaults to 1.
 
 Examples:
@@ -45,7 +45,7 @@ a(42) // -> 43
 a(2, 3) // -> 5
 a(10, -1) // -> 9
 ```
-### `b` - Arithmetic comparison - bigger than
+### `b` - Compare bigger
 `b(A, B)` returns `true` if `A` is bigger `B`, `false` otherwise. If argument `B` is omitted, it defaults to 0. 
 
 Examples:
@@ -57,7 +57,7 @@ b(42) // -> true
 b(1, 2) // -> false
 b(2, 1) // -> true
 ```
-### `c` - Count items
+### `c` - Count
 `c(A)` returns:
 * The number of items in array `A` before the first undefined item or empty index if `A` is an array
 * The number of characters in string `A` if `A` is a string
@@ -72,7 +72,7 @@ c('') // -> 0
 c('foobar') // -> 6
 ```
 
-### `d` - Arithmetic double
+### `d` - Double
 `d(A)` returns the value of `A` multiplied by 2. If argument `A` is omitted, it defaults to 1.
 
 Examples:
@@ -82,7 +82,7 @@ d(42) // -> 84
 d(-10) // -> -20
 ```
 
-### `e` - Logical comparison - equal to
+### `e` - Compare equal
 `e(A, B)` returns `true` _iff_ `A` is strictly equal to `B`, that is `A === B`. See this [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Comparison_Operators# Identity) for details.
 
 Examples:
@@ -92,7 +92,7 @@ e(1, 1) // -> true
 e(1, '1') // -> false
 e({foo: 'bar'}, {foo: 'bar'}) // -> false (actually different objects that just look the same)
 ```
-### `f` - Transform function
+### `f` - Transform
 `f(F, ...A)` returns an array of arguments `...A` passed through function `F` each individually.
 
 Examples:
@@ -101,7 +101,7 @@ f(d, 1, 2, 3) // -> [2, 4, 6] (using function `d` from this package)
 f(b, -4, 1, -10, 42) // -> [false, true, false, true] (using function `b` from this package)
 ```
 
-### `g` - Function composition
+### `g` - Compose
 `g(...F)` returns a composition of functions `...F`, that means `g(A, B, C)` returns ` (X) => A(B(C(X)))`.
 
 Examples:
@@ -136,7 +136,7 @@ i(() => password.length > 8, () => 'Good.', () => 'Too short.') // -> 'Too short
 i(() => 69 < 42, () => 420) // -> undefined (no false branch supplied)
 ```
 
-### `j` - Object constructor
+### `j` - Create object
 `o(...P)` constructs an object from key-value pairs defined by arguments `...P`. Each argument must be an array `[K, V]` where `K` is a valid object key name and `V` is the value to be saved under key `K`. If no arguments are given, the call `j()` returns an empty object.
 
 Examples:
@@ -159,7 +159,7 @@ k('', () => 'bar', () => 'baz') // -> 'baz'
 k('hello world', () => 'hello', () => 'world') // -> 'hello'
 ```
 
-### `l` - Arithmetic comparison - less than
+### `l` - Compare less
 `l(A, B)` returns `true` if `A` is smaller than `B`, `false` otherwise. If argument `B` is omitted, it defaults to 0. 
 
 Examples:
@@ -172,7 +172,7 @@ l(1, 2) // -> true
 l(2, 1) // -> false
 ```
 
-### `m` - Property access
+### `m` - Member
 `m(A, B)` returns property `A` of object `B`. `B` can be either an array, string or object and `A` must be a valid property name for the respective data type.
 
 Examples:
@@ -215,11 +215,11 @@ p((A) => A.split(''), (A) => A.reverse(), (A) => A.shift())('foobar') // -> 'r'
 
 * `q` - Dequeue 
 * `r` - Curry
-* `s` - Arithmetic subtraction
-* `t` - Concatenation
+* `s` - Subtract
+* `t` - Concatenate
 * `u` - Reduce
 * `v` - Reverse
 * `w` - While
 * `x` - Extract
-* `y` - Array constructor
+* `y` - Create array
 * `z` - Zero

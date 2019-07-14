@@ -13,6 +13,12 @@ const definitionLines = lines
 		(s, v) => s.replace(new RegExp(v, 'g'), v.toLowerCase()), //Replace cached values with their functions
 		line
 	));
+const tooltips = new Map(
+	lines
+		.filter((line) => /^ \* [$_a-z] - /.test(line))
+		.map((line) => [line.substring(3, 4), line.slice(3)])
+);
+
 const functionCodes = new Map();
 const dependencyCache = new Map();
 const dependencyStorage = new Map();
@@ -84,8 +90,9 @@ for (const [functionName, dependencies] of dependencyStorage) {
 const independentFunctions = [...dependencyStorage.keys()].filter((k) => !dependencyStorage.get(k).size);
 const operatorUsingFunctions = [...functionCodes.keys()].filter((k) => operatorRegex.test(functionCodes.get(k)));
 const q = (str) => `"${str}"`;
-const dotSourceCode = `digraph dependencies {
+const dotSourceCode = `digraph "" {
 	{ rank=sink; ${independentFunctions.map(q).join(';')} }
+	${[...tooltips].map(([k, v]) => `"${k}"[tooltip="${v}"]`).join(';')}
 	${operatorUsingFunctions.map((f) => `"${f}"[shape=rectangle]`).join(';')}
 	${[...dependencyStorage].map(([f, d]) => d.size ? [...d].map((v) => `${q(f)}->${q(v)}`).join(';') : `${q(f)}`).join(';')}
 }`;

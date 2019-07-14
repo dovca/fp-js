@@ -14,7 +14,7 @@ var removeClass = function (element, cls) {
 	});
 };
 var getNodeName = function (nodeElement) {
-	return nodeElement.querySelector('title').innerHTML;
+	return nodeElement.querySelector('text').innerHTML;
 };
 var getNodeByName = function (fnName) {
 	var result = null;
