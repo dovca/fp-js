@@ -1,6 +1,6 @@
 {
   "name": "@dovca/fp",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Minimal functional programming in JavaScript",
   "main": "index.js",
   "keywords": [
