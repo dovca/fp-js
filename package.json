@@ -31,7 +31,7 @@
     "development": "gulp default",
     "test": "mocha --exclude test/sources",
     "pretest": "npm run clean && npm run build",
-    "dependency-graph": "node meta/generateDependencies.js",
+    "dependency-graph": "node script/generateDependencies.js",
     "prepare": "npm run build",
     "prepublish": "npm run dependency-graph"
   }
