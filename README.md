@@ -14,6 +14,17 @@ JavaScript operators currently used:
 
 Which is only **13.56%** of [all the operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) that Javascript offers!
 
+## How do I use this?
+
+1. Download and install the package
+	```bash
+	npm i --save @dovca/fp
+	```
+1. Require the functions in your script
+	```js
+	const {$,_,a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z} = require('@dovca/fp');
+	```
+
 ## What does it contain?
 
 This package provides 28 single-letter-named functions:
