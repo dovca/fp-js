@@ -2,17 +2,9 @@
 
 The goal of this package is to provide a set of functions whose combinations can be used to write any synchronous JS logic. These functions are written _without any keywords, strings, numbers or array literals_ using as few JS operators as possible.
 
-JavaScript operators currently used: 
-* `-`
-* `!`
-* `<`
-* `=`
-* `||`
-* `===`
-* `() - grouping`
-* `() - function call`
+JavaScript operators currently used: `-`, `!`, `<`, `=`, `||`, `()`, `===`
 
-Which is only **13.56%** of [all the operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) that Javascript offers!
+Which is only **11.86%** of [all the operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) that Javascript offers!
 
 ## How do I use this?
 
@@ -59,7 +51,7 @@ _(a) // -> {foo: 'bar'} which is strictly equal to `a`
 ```
 
 ### `a` - Add
-`a(A, B)` returns the sum of its arguments, that is `a(A, B) === A + B`. If argument `A` is omitted, it defaults to 0. If argument `B` is omitted, it defaults to 1.
+`a(A, B)` returns the sum of its arguments. If argument `A` is omitted, it defaults to 0. If argument `B` is omitted, it defaults to 1.
 
 Examples:
 ```js
@@ -69,7 +61,7 @@ a(2, 3) // -> 5
 a(10, -1) // -> 9
 ```
 ### `b` - Compare bigger
-`b(A, B)` returns `true` if `A` is bigger `B`, `false` otherwise. If argument `B` is omitted, it defaults to 0. 
+`b(A, B)` returns `true` if `A` is bigger than `B`, `false` otherwise. If argument `B` is omitted, it defaults to 0. 
 
 Examples:
 ```js
@@ -160,7 +152,7 @@ i(() => 69 < 42, () => 420) // -> undefined (no false branch supplied)
 ```
 
 ### `j` - Create object
-`o(...P)` constructs an object from key-value pairs defined by arguments `...P`. Each argument must be an array `[K, V]` where `K` is a valid object key name and `V` is the value to be saved under key `K`. If no arguments are given, the call `j()` returns an empty object.
+`j(...P)` constructs an object from key-value pairs defined by arguments `...P`. Each argument must be an array `[K, V]` where `K` is a valid object key name and `V` is the value to be associated with key `K`. If no arguments are given, the call `j()` returns an empty object.
 
 Examples:
 ```js
@@ -172,7 +164,7 @@ j([1, 2], ['a-b-c', [1, 2, 3]]) // -> {1: 2, 'a-b-c': [1, 2, 3]}
 ### `k` - If/else not empty
 `k(A, T, F)` is a specialized version of the [function i](#i---ifelse) from this package. It calls `T` or `F` if the array or string `A` is (non-)empty respectively. 
 
-**Warning:** Due to the very limited resources used in this package, `k([undefined], () => true, () => false)` unexpectedly returns `false` even if the array is obviously not empty.
+**Note:** Due to the very limited resources used in this package, `k([undefined], () => true, () => false)` unexpectedly returns `false` even if the array is obviously not empty.
 
 Examples:
 ```js
@@ -196,7 +188,7 @@ l(2, 1) // -> false
 ```
 
 ### `m` - Member
-`m(A, B)` returns property `A` of object `B`. `B` can be either an array, string or object and `A` must be a valid property name for the respective data type.
+`m(A, B)` returns property `A` of `B`. `B` can be either an array, string or object and `A` must be a valid property name for the respective data type.
 
 Examples:
 ```js
@@ -205,19 +197,19 @@ m(3, 'donkey') // -> 'k'
 m('foo', {foo: 'bar'}) // -> 'bar'
 ```
 
-### `n` - Logical NOR
-`n(A, B)` returns `A` NOR `B`. If argument `B` is omitted, it defaults to `A`, causing the function to behave like a logical negation.
+### `n` - Logical negation
+`n(A)` returns the logical negation of `A`.
 
 Examples:
 ```js
 n() // -> true (negation of undefined)
 n(true) // -> false
-n(true, false) // -> false
-n(false, false) // -> true
+n(33) // -> false
+n('') // -> true
 ```
 
 ### `o` - Logical OR
-`o(A, B)` returns `A` OR `B`. If argument `B` is omitted, it defaults to A, causing the function to work as a converter to boolean.
+`o(A, B)` returns `A` OR `B`. If argument `B` is omitted, it defaults to `A`
 
 Examples:
 ```js
@@ -330,7 +322,9 @@ w(() => true, () => console.log('donkey')) // -> throws RangeError: Maximum call
 ```
 
 ### `x` - Extract
-`x(A)` returns the first element of array `A`. If `A` is a string, its first character is returned.
+`x(A)` returns =:
+* The first element of `A` if it is an array.
+* The first character ofIf `A` if is a string.
 
 Examples:
 ```js

@@ -54,6 +54,20 @@ e = (A, B) => A === B; //operator ===
 E = e();
 
 /**
+ * l - Compare less
+ * @param {numeric} A first value
+ * @param {numeric} [B=[]] second value
+ * @returns {boolean} true if A is less than or equal to B, false otherwise
+ */
+l = (A, B = y()) => A < B; //operator <
+
+/**
+ * Cached value of false
+ * @type {boolean}
+ */
+L = l();
+
+/**
  * x - Extract
  * @param {array|string} C
  * @returns {*} the first element or character of C
@@ -85,32 +99,25 @@ q = ([, ...A]) => A;
 $ = (F, A, ...B) => () => i(() => e(A), () => F, () => F(A, ...B));
 
 /**
- * n - Logical NOR
- * @param {boolean} A
- * @param {boolean} [B=A]
- * @returns {boolean} negation of A if parameter B is omitted, A NOR B otherwise
- */
-n = (A, B = A) => !(A || B); //operator ! and ||
-
-/**
  * o - Logical OR
  * @param {boolean} [A] first value
  * @param {boolean} [B=A] second value
  * @returns {boolean} A converted to boolean if B is omitted, A OR B otherwise
  */
-o = (A, B = A) => n(n(A, B));
+o = (A, B = A) => A || B; //operator ||
 
 /**
- * Cached value of false
- * @type {boolean}
+ * n - Logical negation
+ * @param {boolean} A
+ * @returns {boolean} negation of A if parameter B is omitted, A NOR B otherwise
  */
-O = o();
+n = (A) => !A; //operator !
 
 /**
  * z - Zero
  * @returns {number} 0
  */
-z = (A = O) => s(A, O);
+z = (A = L) => s(A, L);
 
 /**
  * i - If/else
@@ -119,7 +126,7 @@ z = (A = O) => s(A, O);
  * @param {function} [F=function: undefined] function to call if C() is false
  * @returns {*} whatever T() or F() returns
  */
-i = (C, T, F = _) => m(z(o(C())), y(F, T))();
+i = (C, T, F = _) => m(z(n(n(C()))), y(F, T))();
 
 /**
  * w - While
@@ -135,7 +142,7 @@ w = (C, F, R) => i(C, () => w(C, F, F()), $(R));
  * @param {numeric} [B=false] value to subtract from
  * @returns {number} B - A
  */
-s = (A = O, B = E) => A - B; //operator -
+s = (A = L, B = E) => A - B; //operator -
 
 /**
  * a - Add
@@ -143,7 +150,7 @@ s = (A = O, B = E) => A - B; //operator -
  * @param {numeric} [B=true] value to add
  * @returns {number} A + B
  */
-a = (A = O, B = E) => s(A, s(O, B));
+a = (A = L, B = E) => s(A, s(L, B));
 
 /**
  * d - Double
@@ -162,20 +169,12 @@ d = (A = E) => a(A, A);
 c = ([A, ...B], I = z()) => i($(e, A), $(I), $(c, B, a(I)));
 
 /**
- * l - Compare less
- * @param {numeric} A first value
- * @param {numeric} [B=false] second value
- * @returns {boolean} true if A is less than or equal to B, false otherwise
- */
-l = (A, B = O) => A < B; //operator <
-
-/**
  * b - Compare bigger
  * @param {numeric} A first value
  * @param {numeric} [B=false] second value
  * @returns {boolean} true if A is bigger than B, false otherwise
  */
-b = (A, B = O) => l(B, A);
+b = (A, B = L) => l(B, A);
 
 /**
  * k - If/else not empty
@@ -233,7 +232,7 @@ u = (F, A, ...B) => k(B, $(F, A, k(B, $(u, F, ...B))), $(A));
  * @param {...keyValuePair} P
  * @returns {object}
  */
-j = (...P) => k(P, $(u, ([K, V], S) => ({...S, [K]: V}), ...P, j), $({}));
+j = (...P) => k(P, $(u, ([K, V], S) => $({...S, [K]: V})(), ...P, j), $({}));
 
 /**
  * r - Curry
