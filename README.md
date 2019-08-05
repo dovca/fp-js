@@ -327,7 +327,7 @@ w(() => true, () => console.log('donkey')) // -> throws RangeError: Maximum call
 ```
 
 ### `x` - Extract
-`x(A)` returns =:
+`x(A)` returns:
 * The first element of `A` if it is an array.
 * The first character ofIf `A` if is a string.
 
