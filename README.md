@@ -115,7 +115,7 @@ e({foo: 'bar'}, {foo: 'bar'}) // -> false (actually different objects that just 
 Examples:
 ```js
 f(d, 1, 2, 3) // -> [2, 4, 6] (using function `d` from this package)
-f(b, -4, 1, -10, 42) // -> [false, true, false, true] (using function `b` from this package)
+f(l, -4, 1, -10, 42) // -> [true, false, true, false] (using function `l` from this package)
 ```
 
 ### `g` - Compose
