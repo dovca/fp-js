@@ -9,7 +9,7 @@ module.exports = (functionsModuleName) => () => {
 			const randomElement = randomer.anything();
 			const testCases = [
 				{output: () => t([]), expected: []},
-				{output: () => t([1]), expected: [1]},
+				{output: () => t([1]), expected: [1, 1]},
 				{output: () => t([1], randomElement), expected: [1, randomElement]},
 				{output: () => t([2, 3], 4, 5, 6), expected: [2, 3, 4, 5, 6]},
 				{output: () => t([4, 5, 6, 7], 8, 9), expected: [4, 5, 6, 7, 8, 9]},

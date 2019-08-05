@@ -1,12 +1,14 @@
-## What is this package about?
+## What is FP-JS about?
 
 The goal of this package is to provide a set of functions whose combinations can be used to write any synchronous JS logic. These functions are written _without any keywords, strings, numbers or array literals_ using as few JS operators as possible.
 
-JavaScript operators currently used: `-`, `!`, `<`, `=`, `||`, `()`, `===`
+JavaScript operators currently used: `~`, `+`, `<`, `=`, `()`, `===`.
 
-Which is only **11.86%** of [all the operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) that Javascript offers!
+Which is only **10.17%** of [all the operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Operator_Precedence#Table) that Javascript offers! Moreover, operators `~`, `+`, `<`, `===` are each used only once in the whole code.
 
-## How do I use this?
+FP-JS does not depend on a browser environment, you can use it with Node.js.
+
+## How do I use it?
 
 1. Download and install the package
 	```bash
@@ -60,18 +62,18 @@ a(42) // -> 43
 a(2, 3) // -> 5
 a(10, -1) // -> 9
 ```
-### `b` - Compare bigger
-`b(A, B)` returns `true` if `A` is bigger than `B`, `false` otherwise. If argument `B` is omitted, it defaults to 0. 
+
+### `b` - Subtract
+`b(A, B)` subtracts `B` from `A` and returns the result. If argument `A` is omitted, it defaults to 0. If argument `B` is omitted, it defaults to 1.
 
 Examples:
 ```js
-b() // -> false (undefined is not bigger than 0)
-b(0) // -> false
-b(-5) // -> false
-b(42) // -> true
-b(1, 2) // -> false
-b(2, 1) // -> true
+b() // -> -1
+b(5) // -> 4
+b(5, 3) // -> 2
+b(1, -1) // -> 2
 ```
+
 ### `c` - Count
 `c(A)` returns:
 * The number of items in array `A` before the first undefined item or empty index if `A` is an array
@@ -198,14 +200,16 @@ m('foo', {foo: 'bar'}) // -> 'bar'
 ```
 
 ### `n` - Logical negation
-`n(A)` returns the logical negation of `A`.
+`n(A)` returns the logical negation of `A`. Only works with numbers, booleans, `undefined` and `null`
 
 Examples:
 ```js
 n() // -> true (negation of undefined)
 n(true) // -> false
 n(33) // -> false
-n('') // -> true
+n(-10) // -> false
+n(0) // -> true
+n(null) // -> true
 ```
 
 ### `o` - Logical OR
@@ -217,6 +221,7 @@ o() // -> false (undefined converted to boolean)
 o(42) // -> true
 o(true, false) // -> true
 o(false, false) // -> false
+o(-5, 20) // -> true
 ```
 
 ### `p` - Pipe
@@ -262,15 +267,15 @@ x2y3z(4) // -> 14
 x2y3z(10) // -> 32
 ```
 
-### `s` - Subtract
-`s(A, B)` subtracts `B` from `A` and returns the result. If argument `A` is omitted, it defaults to 0. If argument `B` is omitted, it defaults to 1.
+### `s` - String
+`s(...A)` returns all arguments concatenated in a single string. If no arguments are given, `s()` returns an empty string.
 
 Examples:
 ```js
-s() // -> -1
-s(5) // -> 4
-s(5, 3) // -> 2
-s(1, -1) // -> 2
+s() // -> ''
+s('abc') // -> 'abc'
+s(1, 2, 3) // -> '123'
+s(true, 'foo', null, 3, 'bar') // -> 'truefoonull3bar'
 ```
 
 ### `t` - Concatenate
@@ -346,7 +351,7 @@ y(...'donkey') // -> ['d', 'o', 'n', 'k', 'e', 'y']
 ```
 
 ### `z` - Zero
-`z(A)` returns `A` converted to number. If argument `A` is omitted, it defaults to `false`, thus returning 0.
+`z(A)` returns `A` converted to number. This only works for numbers, booleans, `null` and `undefined`. If argument `A` is omitted, it defaults to `false`, thus returning 0.
 
 Examples:
 ```js
@@ -354,13 +359,20 @@ z() // -> 0
 z(true) // -> 1
 z(-5) // -> -5
 z(5) // -> 5
-z('5') // -> 5
+z(null) // -> 0
 ```
 
 ## How does it work?
 
-This is the function dependency graph:
+Each function provides very straightforward and simple logic. Through combinations of these functions, we can create more complex functions that can grow very powerful in only a few steps. This is the function dependency graph:
 
 ![Dependecy graph](https://raw.githubusercontent.com/dovca/fp-js/master/dependencies.svg?sanitize=true)
 
 Functions with rectangular nodes use operators that could possibly be removed or refactored. Clone the project and open the graph locally in your browser for bonus interactivity!
+
+## How does it differ from JSFuck?
+
+[JSFuck](http://www.jsfuck.com/) works differently and has different goals. It basically tries to construct a JS code string from its 6 characters and then pass it to `eval()`.
+
+FP-JS doesn't need to use `eval()`.
+
