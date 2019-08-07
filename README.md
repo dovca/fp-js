@@ -329,7 +329,7 @@ w(() => true, () => console.log('donkey')) // -> throws RangeError: Maximum call
 ### `x` - Extract
 `x(A)` returns:
 * The first element of `A` if it is an array.
-* The first character ofIf `A` if is a string.
+* The first character of `A` if is a string.
 
 Examples:
 ```js
