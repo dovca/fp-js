@@ -26,21 +26,21 @@
 </a>
 </g>
 </g>
-<!-- m -->
+<!-- x -->
 <g id="node3" class="node">
-<title>m</title>
-<g id="a_node3"><a xlink:title="m &#45; Member">
+<title>x</title>
+<g id="a_node3"><a xlink:title="x &#45; Extract">
 <ellipse fill="none" stroke="#000000" cx="298" cy="-378" rx="27" ry="18"/>
-<text text-anchor="middle" x="298" y="-374.3" font-family="Times,serif" font-size="14.00" fill="#000000">m</text>
+<text text-anchor="middle" x="298" y="-374.3" font-family="Times,serif" font-size="14.00" fill="#000000">x</text>
 </a>
 </g>
 </g>
-<!-- x -->
+<!-- q -->
 <g id="node4" class="node">
-<title>x</title>
-<g id="a_node4"><a xlink:title="x &#45; Extract">
+<title>q</title>
+<g id="a_node4"><a xlink:title="q &#45; Dequeue">
 <ellipse fill="none" stroke="#000000" cx="334" cy="-522" rx="27" ry="18"/>
-<text text-anchor="middle" x="334" y="-518.3" font-family="Times,serif" font-size="14.00" fill="#000000">x</text>
+<text text-anchor="middle" x="334" y="-518.3" font-family="Times,serif" font-size="14.00" fill="#000000">q</text>
 </a>
 </g>
 </g>
@@ -194,9 +194,9 @@
 <path fill="none" stroke="#000000" d="M226,-431.8314C226,-424.131 226,-414.9743 226,-406.4166"/>
 <polygon fill="#000000" stroke="#000000" points="229.5001,-406.4132 226,-396.4133 222.5001,-406.4133 229.5001,-406.4132"/>
 </g>
-<!-- i&#45;&gt;m -->
+<!-- i&#45;&gt;x -->
 <g id="edge11" class="edge">
-<title>i&#45;&gt;m</title>
+<title>i&#45;&gt;x</title>
 <path fill="none" stroke="#000000" d="M241.2693,-434.7307C251.197,-424.803 264.3153,-411.6847 275.4363,-400.5637"/>
 <polygon fill="#000000" stroke="#000000" points="278.1564,-402.7933 282.7527,-393.2473 273.2067,-397.8436 278.1564,-402.7933"/>
 </g>
@@ -257,9 +257,9 @@
 </a>
 </g>
 </g>
-<!-- k&#45;&gt;x -->
+<!-- k&#45;&gt;q -->
 <g id="edge18" class="edge">
-<title>k&#45;&gt;x</title>
+<title>k&#45;&gt;q</title>
 <path fill="none" stroke="#000000" d="M334,-575.8314C334,-568.131 334,-558.9743 334,-550.4166"/>
 <polygon fill="#000000" stroke="#000000" points="337.5001,-550.4132 334,-540.4133 330.5001,-550.4133 337.5001,-550.4132"/>
 </g>
@@ -326,24 +326,24 @@
 <path fill="none" stroke="#000000" d="M308.895,-678.4321C321.688,-681.6753 334,-677.5313 334,-666 334,-657.6218 327.5006,-653.1433 319.0395,-652.5644"/>
 <polygon fill="#000000" stroke="#000000" points="318.5019,-649.1004 308.895,-653.5679 319.191,-656.0665 318.5019,-649.1004"/>
 </g>
-<!-- f -->
+<!-- m -->
 <g id="node21" class="node">
-<title>f</title>
-<g id="a_node21"><a xlink:title="f &#45; Transform">
+<title>m</title>
+<g id="a_node21"><a xlink:title="m &#45; Map">
 <ellipse fill="none" stroke="#000000" cx="379" cy="-666" rx="27" ry="18"/>
-<text text-anchor="middle" x="379" y="-662.3" font-family="Times,serif" font-size="14.00" fill="#000000">f</text>
+<text text-anchor="middle" x="379" y="-662.3" font-family="Times,serif" font-size="14.00" fill="#000000">m</text>
 </a>
 </g>
 </g>
-<!-- f&#45;&gt;k -->
+<!-- m&#45;&gt;k -->
 <g id="edge24" class="edge">
-<title>f&#45;&gt;k</title>
+<title>m&#45;&gt;k</title>
 <path fill="none" stroke="#000000" d="M368.563,-649.3008C363.0765,-640.5224 356.2314,-629.5703 350.0837,-619.7339"/>
 <polygon fill="#000000" stroke="#000000" points="352.9609,-617.7336 344.6929,-611.1086 347.0249,-621.4436 352.9609,-617.7336"/>
 </g>
-<!-- f&#45;&gt;f -->
+<!-- m&#45;&gt;m -->
 <g id="edge25" class="edge">
-<title>f&#45;&gt;f</title>
+<title>m&#45;&gt;m</title>
 <path fill="none" stroke="#000000" d="M398.895,-678.4321C411.688,-681.6753 424,-677.5313 424,-666 424,-657.6218 417.5006,-653.1433 409.0395,-652.5644"/>
 <polygon fill="#000000" stroke="#000000" points="408.5019,-649.1004 398.895,-653.5679 409.191,-656.0665 408.5019,-649.1004"/>
 </g>
@@ -368,24 +368,24 @@
 <path fill="none" stroke="#000000" d="M254.437,-721.3008C259.9235,-712.5224 266.7686,-701.5703 272.9163,-691.7339"/>
 <polygon fill="#000000" stroke="#000000" points="275.9751,-693.4436 278.3071,-683.1086 270.0391,-689.7336 275.9751,-693.4436"/>
 </g>
-<!-- u -->
+<!-- r -->
 <g id="node23" class="node">
-<title>u</title>
-<g id="a_node23"><a xlink:title="u &#45; Reduce">
+<title>r</title>
+<g id="a_node23"><a xlink:title="r &#45; Curry">
 <ellipse fill="none" stroke="#000000" cx="469" cy="-666" rx="27" ry="18"/>
-<text text-anchor="middle" x="469" y="-662.3" font-family="Times,serif" font-size="14.00" fill="#000000">u</text>
+<text text-anchor="middle" x="469" y="-662.3" font-family="Times,serif" font-size="14.00" fill="#000000">r</text>
 </a>
 </g>
 </g>
-<!-- u&#45;&gt;k -->
+<!-- r&#45;&gt;k -->
 <g id="edge28" class="edge">
-<title>u&#45;&gt;k</title>
+<title>r&#45;&gt;k</title>
 <path fill="none" stroke="#000000" d="M447.9063,-654.75C425.4504,-642.7735 389.7134,-623.7138 364.2599,-610.1386"/>
 <polygon fill="#000000" stroke="#000000" points="365.8618,-607.0263 355.3912,-605.4086 362.5676,-613.2028 365.8618,-607.0263"/>
 </g>
-<!-- u&#45;&gt;u -->
+<!-- r&#45;&gt;r -->
 <g id="edge29" class="edge">
-<title>u&#45;&gt;u</title>
+<title>r&#45;&gt;r</title>
 <path fill="none" stroke="#000000" d="M488.895,-678.4321C501.688,-681.6753 514,-677.5313 514,-666 514,-657.6218 507.5006,-653.1433 499.0395,-652.5644"/>
 <polygon fill="#000000" stroke="#000000" points="498.5019,-649.1004 488.895,-653.5679 499.191,-656.0665 498.5019,-649.1004"/>
 </g>
@@ -398,9 +398,9 @@
 </a>
 </g>
 </g>
-<!-- s&#45;&gt;u -->
+<!-- s&#45;&gt;r -->
 <g id="edge30" class="edge">
-<title>s&#45;&gt;u</title>
+<title>s&#45;&gt;r</title>
 <path fill="none" stroke="#000000" d="M412.2693,-722.7307C422.197,-712.803 435.3153,-699.6847 446.4363,-688.5637"/>
 <polygon fill="#000000" stroke="#000000" points="449.1564,-690.7933 453.7527,-681.2473 444.2067,-685.8436 449.1564,-690.7933"/>
 </g>
@@ -413,9 +413,9 @@
 </a>
 </g>
 </g>
-<!-- j&#45;&gt;u -->
+<!-- j&#45;&gt;r -->
 <g id="edge31" class="edge">
-<title>j&#45;&gt;u</title>
+<title>j&#45;&gt;r</title>
 <path fill="none" stroke="#000000" d="M469,-719.8314C469,-712.131 469,-702.9743 469,-694.4166"/>
 <polygon fill="#000000" stroke="#000000" points="472.5001,-694.4132 469,-684.4133 465.5001,-694.4133 472.5001,-694.4132"/>
 </g>
@@ -425,43 +425,10 @@
 <path fill="none" stroke="#000000" d="M488.895,-750.4321C501.688,-753.6753 514,-749.5313 514,-738 514,-729.6218 507.5006,-725.1433 499.0395,-724.5644"/>
 <polygon fill="#000000" stroke="#000000" points="498.5019,-721.1004 488.895,-725.5679 499.191,-728.0665 498.5019,-721.1004"/>
 </g>
-<!-- r -->
-<g id="node26" class="node">
-<title>r</title>
-<g id="a_node26"><a xlink:title="r &#45; Curry">
-<ellipse fill="none" stroke="#000000" cx="64" cy="-594" rx="27" ry="18"/>
-<text text-anchor="middle" x="64" y="-590.3" font-family="Times,serif" font-size="14.00" fill="#000000">r</text>
-</a>
-</g>
-</g>
-<!-- r&#45;&gt;b -->
-<g id="edge36" class="edge">
-<title>r&#45;&gt;b</title>
-<path fill="none" stroke="#000000" d="M59.3887,-576.0535C53.074,-551.4774 41.6717,-507.1008 34.2195,-478.0974"/>
-<polygon fill="#000000" stroke="#000000" points="37.5479,-476.9871 31.6694,-468.1727 30.7682,-478.7291 37.5479,-476.9871"/>
-</g>
-<!-- r&#45;&gt;$ -->
-<g id="edge34" class="edge">
-<title>r&#45;&gt;$</title>
-<path fill="none" stroke="#000000" d="M86.5254,-583.9887C114.4956,-571.5575 162.3843,-550.2736 194.1162,-536.1706"/>
-<polygon fill="#000000" stroke="#000000" points="195.6887,-539.3019 203.4054,-532.0421 192.8457,-532.9052 195.6887,-539.3019"/>
-</g>
-<!-- r&#45;&gt;d -->
-<g id="edge33" class="edge">
-<title>r&#45;&gt;d</title>
-<path fill="none" stroke="#000000" d="M65.126,-575.9843C68.1691,-527.2939 76.5752,-392.7961 80.2464,-334.0573"/>
-<polygon fill="#000000" stroke="#000000" points="83.7438,-334.2078 80.8744,-324.0089 76.7574,-333.771 83.7438,-334.2078"/>
-</g>
-<!-- r&#45;&gt;r -->
-<g id="edge35" class="edge">
-<title>r&#45;&gt;r</title>
-<path fill="none" stroke="#000000" d="M83.895,-606.4321C96.688,-609.6753 109,-605.5313 109,-594 109,-585.6218 102.5006,-581.1433 94.0395,-580.5644"/>
-<polygon fill="#000000" stroke="#000000" points="93.5019,-577.1004 83.895,-581.5679 94.191,-584.0665 93.5019,-577.1004"/>
-</g>
 <!-- h -->
-<g id="node27" class="node">
+<g id="node26" class="node">
 <title>h</title>
-<g id="a_node27"><a xlink:title="h &#45; Switch">
+<g id="a_node26"><a xlink:title="h &#45; Switch">
 <ellipse fill="none" stroke="#000000" cx="559" cy="-666" rx="27" ry="18"/>
 <text text-anchor="middle" x="559" y="-662.3" font-family="Times,serif" font-size="14.00" fill="#000000">h</text>
 </a>
@@ -479,20 +446,50 @@
 <path fill="none" stroke="#000000" d="M578.895,-678.4321C591.688,-681.6753 604,-677.5313 604,-666 604,-657.6218 597.5006,-653.1433 589.0395,-652.5644"/>
 <polygon fill="#000000" stroke="#000000" points="588.5019,-649.1004 578.895,-653.5679 589.191,-656.0665 588.5019,-649.1004"/>
 </g>
-<!-- q -->
-<g id="node28" class="node">
-<title>q</title>
-<g id="a_node28"><a xlink:title="q &#45; Pick">
+<!-- f -->
+<g id="node27" class="node">
+<title>f</title>
+<g id="a_node27"><a xlink:title="f &#45; Filter">
 <ellipse fill="none" stroke="#000000" cx="559" cy="-738" rx="27" ry="18"/>
-<text text-anchor="middle" x="559" y="-734.3" font-family="Times,serif" font-size="14.00" fill="#000000">q</text>
+<text text-anchor="middle" x="559" y="-734.3" font-family="Times,serif" font-size="14.00" fill="#000000">f</text>
 </a>
 </g>
 </g>
-<!-- q&#45;&gt;u -->
+<!-- f&#45;&gt;r -->
 <g id="edge39" class="edge">
-<title>q&#45;&gt;u</title>
+<title>f&#45;&gt;r</title>
 <path fill="none" stroke="#000000" d="M541.6471,-724.1177C528.2003,-713.3602 509.3761,-698.3009 494.259,-686.2072"/>
 <polygon fill="#000000" stroke="#000000" points="496.2948,-683.3536 486.2996,-679.8397 491.9219,-688.8197 496.2948,-683.3536"/>
+</g>
+<!-- u -->
+<g id="node28" class="node">
+<title>u</title>
+<ellipse fill="none" stroke="#000000" cx="64" cy="-594" rx="27" ry="18"/>
+<text text-anchor="middle" x="64" y="-590.3" font-family="Times,serif" font-size="14.00" fill="#000000">u</text>
+</g>
+<!-- u&#45;&gt;b -->
+<g id="edge36" class="edge">
+<title>u&#45;&gt;b</title>
+<path fill="none" stroke="#000000" d="M59.3887,-576.0535C53.074,-551.4774 41.6717,-507.1008 34.2195,-478.0974"/>
+<polygon fill="#000000" stroke="#000000" points="37.5479,-476.9871 31.6694,-468.1727 30.7682,-478.7291 37.5479,-476.9871"/>
+</g>
+<!-- u&#45;&gt;$ -->
+<g id="edge34" class="edge">
+<title>u&#45;&gt;$</title>
+<path fill="none" stroke="#000000" d="M86.5254,-583.9887C114.4956,-571.5575 162.3843,-550.2736 194.1162,-536.1706"/>
+<polygon fill="#000000" stroke="#000000" points="195.6887,-539.3019 203.4054,-532.0421 192.8457,-532.9052 195.6887,-539.3019"/>
+</g>
+<!-- u&#45;&gt;d -->
+<g id="edge33" class="edge">
+<title>u&#45;&gt;d</title>
+<path fill="none" stroke="#000000" d="M65.126,-575.9843C68.1691,-527.2939 76.5752,-392.7961 80.2464,-334.0573"/>
+<polygon fill="#000000" stroke="#000000" points="83.7438,-334.2078 80.8744,-324.0089 76.7574,-333.771 83.7438,-334.2078"/>
+</g>
+<!-- u&#45;&gt;u -->
+<g id="edge35" class="edge">
+<title>u&#45;&gt;u</title>
+<path fill="none" stroke="#000000" d="M83.895,-606.4321C96.688,-609.6753 109,-605.5313 109,-594 109,-585.6218 102.5006,-581.1433 94.0395,-580.5644"/>
+<polygon fill="#000000" stroke="#000000" points="93.5019,-577.1004 83.895,-581.5679 94.191,-584.0665 93.5019,-577.1004"/>
 </g>
 </g>
 <style>.node {
@@ -527,60 +524,60 @@
 		<script id="graph-dependencies-script">
 			var dependencies = new Map([["_", new Set([])],
 ["y", new Set([])],
-["m", new Set([])],
 ["x", new Set([])],
+["q", new Set([])],
 ["e", new Set([])],
 ["a", new Set(["l","e","y"])],
 ["l", new Set(["y"])],
 ["b", new Set(["l","e","a","y"])],
-["$", new Set(["i","e","_","m","z","o","y","l","a","n"])],
+["$", new Set(["i","e","_","x","z","o","y","l","a","n"])],
 ["z", new Set(["l","a","y","e"])],
 ["d", new Set(["e","a","l","y"])],
 ["n", new Set(["e","z","l","a","y"])],
 ["o", new Set(["l","a","n","y","e","z"])],
-["i", new Set(["_","m","z","o","y","l","a","e","n"])],
-["w", new Set(["i","w","$","_","m","z","o","y","l","a","e","n"])],
-["c", new Set(["z","i","$","e","c","a","l","y","_","m","o","n"])],
-["k", new Set(["_","i","$","e","x","m","z","o","y","l","a","n"])],
-["t", new Set(["y","k","$","_","i","e","x","m","z","o","l","a","n"])],
-["g", new Set(["k","g","$","_","i","e","x","m","z","o","y","l","a","n"])],
-["v", new Set(["y","k","$","v","_","i","e","x","m","z","o","l","a","n"])],
-["f", new Set(["y","k","$","f","_","i","e","x","m","z","o","l","a","n"])],
-["p", new Set(["g","v","k","$","_","i","e","x","m","z","o","y","l","a","n"])],
-["u", new Set(["k","$","u","_","i","e","x","m","z","o","y","l","a","n"])],
-["s", new Set(["u","a","y","k","$","_","i","e","x","m","z","o","l","n"])],
-["j", new Set(["k","$","u","j","_","i","e","x","m","z","o","y","l","a","n"])],
-["r", new Set(["d","i","$","l","r","b","e","a","y","_","m","z","o","n"])],
-["h", new Set(["i","$","k","h","_","m","z","o","y","l","a","e","n","x"])],
-["q", new Set(["u","y","i","$","k","_","e","x","m","z","o","l","a","n"])]]);
-			var inverseDependencies = new Map([["_", new Set(["i","k","$","w","c","r","h","q","t","g","v","f","u","j","p","s"])],
-["y", new Set(["l","i","t","v","f","s","q","a","b","z","o","r","d","c","n","$","w","k","h","g","u","j","p"])],
-["m", new Set(["i","$","w","c","k","r","h","q","t","g","v","f","u","j","p","s"])],
-["x", new Set(["k","t","g","v","f","u","j","h","p","s","q"])],
-["e", new Set(["a","b","$","d","n","c","k","z","o","s","r","i","w","h","q","t","g","v","f","u","j","p"])],
-["a", new Set(["b","z","d","o","c","s","r","n","i","$","w","k","h","q","t","g","v","f","u","j","p"])],
-["l", new Set(["a","b","z","o","r","d","c","s","n","i","$","w","k","h","q","t","g","v","f","u","j","p"])],
-["b", new Set(["r"])],
-["$", new Set(["w","c","k","t","g","v","f","u","j","r","h","q","p","s"])],
-["i", new Set(["$","w","c","k","r","h","q","t","g","v","f","u","j","p","s"])],
-["z", new Set(["n","i","c","o","$","w","k","r","h","q","t","g","v","f","u","j","p","s"])],
-["d", new Set(["r"])],
-["n", new Set(["o","i","$","w","c","k","r","h","q","t","g","v","f","u","j","p","s"])],
-["o", new Set(["i","$","w","c","k","r","h","q","t","g","v","f","u","j","p","s"])],
+["i", new Set(["_","x","z","o","y","l","a","e","n"])],
+["w", new Set(["i","w","$","_","x","z","o","y","l","a","e","n"])],
+["c", new Set(["z","i","$","e","c","a","l","y","_","x","o","n"])],
+["k", new Set(["_","i","$","e","q","x","z","o","y","l","a","n"])],
+["t", new Set(["y","k","$","_","i","e","q","x","z","o","l","a","n"])],
+["g", new Set(["k","g","$","_","i","e","q","x","z","o","y","l","a","n"])],
+["v", new Set(["y","k","$","v","_","i","e","q","x","z","o","l","a","n"])],
+["m", new Set(["y","k","$","m","_","i","e","q","x","z","o","l","a","n"])],
+["p", new Set(["g","v","k","$","_","i","e","q","x","z","o","y","l","a","n"])],
+["r", new Set(["k","$","r","_","i","e","q","x","z","o","y","l","a","n"])],
+["s", new Set(["r","a","y","k","$","_","i","e","q","x","z","o","l","n"])],
+["j", new Set(["k","$","r","j","_","i","e","q","x","z","o","y","l","a","n"])],
+["u", new Set(["d","i","$","l","u","b","e","a","y","_","x","z","o","n"])],
+["h", new Set(["i","$","k","h","_","x","z","o","y","l","a","e","n","q"])],
+["f", new Set(["r","i","$","y","k","_","e","q","x","z","o","l","a","n"])]]);
+			var inverseDependencies = new Map([["_", new Set(["i","k","$","w","c","u","h","f","t","g","v","m","r","j","p","s"])],
+["y", new Set(["l","i","t","v","m","s","f","a","b","z","o","u","d","c","n","$","w","k","h","g","r","j","p"])],
+["x", new Set(["i","$","w","c","k","u","h","f","t","g","v","m","r","j","p","s"])],
+["q", new Set(["k","t","g","v","m","r","j","h","p","s","f"])],
+["e", new Set(["a","b","$","d","n","c","k","z","o","s","u","i","w","h","f","t","g","v","m","r","j","p"])],
+["a", new Set(["b","z","d","o","c","s","u","n","i","$","w","k","h","f","t","g","v","m","r","j","p"])],
+["l", new Set(["a","b","z","o","u","d","c","s","n","i","$","w","k","h","f","t","g","v","m","r","j","p"])],
+["b", new Set(["u"])],
+["$", new Set(["w","c","k","t","g","v","m","r","j","u","h","f","p","s"])],
+["i", new Set(["$","w","c","k","u","h","f","t","g","v","m","r","j","p","s"])],
+["z", new Set(["n","i","c","o","$","w","k","u","h","f","t","g","v","m","r","j","p","s"])],
+["d", new Set(["u"])],
+["n", new Set(["o","i","$","w","c","k","u","h","f","t","g","v","m","r","j","p","s"])],
+["o", new Set(["i","$","w","c","k","u","h","f","t","g","v","m","r","j","p","s"])],
 ["w", new Set(["w"])],
 ["c", new Set(["c"])],
-["k", new Set(["t","g","v","f","u","j","h","p","s","q"])],
+["k", new Set(["t","g","v","m","r","j","h","p","s","f"])],
 ["t", new Set([])],
 ["g", new Set(["g","p"])],
 ["v", new Set(["v","p"])],
-["f", new Set(["f"])],
+["m", new Set(["m"])],
 ["p", new Set([])],
-["u", new Set(["u","s","j","q"])],
+["r", new Set(["r","s","j","f"])],
 ["s", new Set([])],
 ["j", new Set(["j"])],
-["r", new Set(["r"])],
+["u", new Set(["u"])],
 ["h", new Set(["h"])],
-["q", new Set([])]]);
+["f", new Set([])]]);
 			var scriptElement = document.getElementById('graph-dependencies-script');
 var nodeCollection = scriptElement.parentElement.querySelectorAll('.node');
 var addClass = function (element, cls) {
