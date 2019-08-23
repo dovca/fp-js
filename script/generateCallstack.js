@@ -54,6 +54,8 @@ exec(`mkdir -p ${outputDirectory} && echo '${gnuplotCommands.replace('\n', '\\\n
 	if (error) {
 		console.log(error, stderr.toString());
 	} else {
-		process.stdout.write(`${outputPath}\n`);
+		process.stdout.write(`Total calls: ${buffer.length / 2}\n`);
+		process.stdout.write(`Max callstack depth: ${maxDepth}\n`);
+		process.stdout.write(`Callstack graph file: ${outputPath}\n`);
 	}
 });

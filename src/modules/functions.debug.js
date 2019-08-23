@@ -2,6 +2,8 @@ const debug = require(`${__dirname}/../util/debug`);
 
 //@include ../partials/definitions.js
 
+$ = debug.wrap($, '$');
+_ = debug.wrap(_, '_');
 a = debug.wrap(a, 'a');
 b = debug.wrap(b, 'b');
 c = debug.wrap(c, 'c');

@@ -53,13 +53,6 @@ m = (A, {[A]: B}) => B;
 x = ([A]) => A;
 
 /**
- * q - Dequeue
- * @param A (reserved for internal use)
- * @returns {*[]} clone of first parameter with first element removed
- */
-q = ([, ...A]) => A;
-
-/**
  * e - Compare equal
  * @param {*} [A] first value
  * @param {*} [B] second value
@@ -181,7 +174,7 @@ k = (A, T, F = _) => i($(e, x(A)), F, T);
  * @param {...*} B values to push
  * @returns {*[]} new modified array
  */
-t = (A, ...B) => y(...A, ...k(B, $(B), $(A)));
+t = (A, ...B) => y(...A, ...k(B, $(B), $(Y)));
 
 /**
  * g - Compose
@@ -256,3 +249,11 @@ r = (F, N = d(), ...A) => (X) => i($(l, N, d()), $(F, ...A, X), $(r, F, b(N), ..
  * @returns {*} anything that the executed case returns or undefined if no case was executed
  */
 h = (C, ...R) => i(...C, $(k, R, $(h, ...R)));
+
+/**
+ * q - Pick
+ * @param {function(*): boolean} F function that returns true for each value that should be picked
+ * @param {...*} A elements
+ * @returns {*[]} array with values from A that were picked by F
+ */
+q = (F, ...A) => u((V, S) => i($(F, V), $(y, V, ...S), $(S)), ...A, Y);
