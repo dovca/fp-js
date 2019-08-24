@@ -109,17 +109,19 @@ e(1, 1) // -> true
 e(1, '1') // -> false
 e({foo: 'bar'}, {foo: 'bar'}) // -> false (actually different objects that just look the same)
 ```
-### `f` - Transform
-`f(F, ...A)` returns an array of arguments `...A` passed through function `F` each individually.
+### `f` - Filter
+`f(F, ...A)` returns an array filled with elements `X` from `...A` for which `F(X)` returns a [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) value. The returned elements are in the same relative order. If no elements are given, an empty array is returned.
 
 Examples:
 ```js
-f(d, 1, 2, 3) // -> [2, 4, 6] (using function `d` from this package)
-f(l, -4, 1, -10, 42) // -> [true, false, true, false] (using function `l` from this package)
+f((X) => true) // -> [] (no elements to filter, no elements returned)
+f((X) => X > 10, 4, 7, 20, 12, 3, 50, 4, 7, 98) // -> [20, 12, 50, 98]
+f((X) => X % 2 === 0, 1, 2, 3, 4, 5, 6) // -> [2, 4, 6]
+f((X) => X.length > 5, 'foo', 'bar', 'hello', 'donkey') // -> ['donkey']
 ```
 
 ### `g` - Compose
-`g(...F)` returns a composition of functions `...F`, that means `g(A, B, C)` returns ` (X) => A(B(C(X)))`.
+`g(...F)` returns a composition of functions `...F`, that means `g(A, B, C)` returns `(X) => A(B(C(X)))`.
 
 Examples:
 ```js
@@ -189,14 +191,14 @@ l(1, 2) // -> true
 l(2, 1) // -> false
 ```
 
-### `m` - Member
-`m(A, B)` returns property `A` of `B`. `B` can be either an array, string or object and `A` must be a valid property name for the respective data type.
+### `m` - Map
+`m(F, ...A)` returns an array of arguments `...A` passed through function `F` each individually.
 
 Examples:
 ```js
-m(0, [10, 20, 30]) // -> 10
-m(3, 'donkey') // -> 'k'
-m('foo', {foo: 'bar'}) // -> 'bar'
+m((X) => X + 1, 0, 1, 2, 3) // -> [1, 2, 3, 4]
+m(d, 1, 2, 3) // -> [2, 4, 6] (using function `d` from this package)
+m(l, -4, 1, -10, 42) // -> [true, false, true, false] (using function `l` from this package)
 ```
 
 ### `n` - Logical negation
@@ -243,28 +245,18 @@ q(['foo']) // -> []
 q([]) // -> []
 ```  
 
-### `r` - Curry
-`r(F, N)` returns a [curried](https://en.wikipedia.org/wiki/Currying) `N`-ary function `F`. If argument `N` is omitted, it defaults to 2 making it easy to curry binary functions.
+### `r` - Reduce
+`r(F, ...A)` applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. Last element of `...A` is the initial accumulator value. If `...A` contains only a single value, it is returned unmodified and `F` is not called. If `...A` is empty, `undefined` is returned.
 
 Examples:
 ```js
-const add = r((A, B) => A + B); // -> (A) => (B) => A + B
-add(1)(2) // -> 3
-add(12)(34) // -> 46
+r(a, 1, 2, 3, 4, 5) // -> 15 (using function `a` from this package)
+r((S, V) => Math.max(S, V), -2, 0, 15, -9, 42, 8, -40) // -> 42 (finds the largest value)
+r((A, B) => `${A} ${B}`, 'foo', 'bar', 'baz'); // -> 'foo bar baz'
 
-const addTwo = add(2); // -> (B) => 2 + B
-addTwo(1) // -> 3
-addTwo(42) // -> 44
-
-const xyz = r((X, Y, Z) => X + Y * Z, 3);
-xyz(2)(3)(4) // -> 14
-xyz(2)(3)(10) // -> 32
-
-const x2y3z = xyz(2)(3) // -> (Z) => 2 + 3 * Z
-// even though Y * Z has priority in the curried function and should evaluate first, x2y3z can exist without Z)
-
-x2y3z(4) // -> 14
-x2y3z(10) // -> 32
+r(a, 3) // -> 3 (nothing to reduce, this only initialized the accumulator)
+r(a) // -> undefined (the accumulator wasn't even initialized)
+r() // -> undefined (duh...)
 ```
 
 ### `s` - String
@@ -285,21 +277,33 @@ Examples:
 ```js
 t([]) // -> []
 t([1]) // -> [1]
+t([1], 10) // -> [1, 10]
 t([1, 2], 3, 4) // -> [1, 2, 3, 4]
+t([1, 2], [3, 4]) // -> [1, 2, [3, 4]]
 ```
 
-### `u` - Reduce
-`u(F, ...A)` applies a function against an accumulator and each value of the array (from right-to-left) to reduce it to a single value. Last element of `...A` is the initial accumulator value. If `...A` contains only a single value, it is returned unmodified and `F` is not called. If `...A` is empty, `undefined` is returned.
+### `u` - Curry
+`u(F, N)` returns a [curried](https://en.wikipedia.org/wiki/Currying) `N`-ary function `F`. If argument `N` is omitted, it defaults to 2 making it easy to curry binary functions.
 
 Examples:
 ```js
-u(a, 1, 2, 3, 4, 5) // -> 15 (using function `a` from this package)
-u((S, V) => Math.max(S, V), -2, 0, 15, -9, 42, 8, -40) // -> 42 (finds the largest value)
-u((A, B) => `${A} ${B}`, 'foo', 'bar', 'baz'); // -> 'foo bar baz'
+const add = u((A, B) => A + B); // -> (A) => (B) => A + B
+add(1)(2) // -> 3
+add(12)(34) // -> 46
 
-u(a, 3) // -> 3 (nothing to reduce, this only initialized the accumulator)
-u(a) // -> undefined (the accumulator wasn't even initialized)
-u() // -> undefined (duh...)
+const addTwo = add(2); // -> (B) => 2 + B
+addTwo(1) // -> 3
+addTwo(42) // -> 44
+
+const xyz = u((X, Y, Z) => X + Y * Z, 3);
+xyz(2)(3)(4) // -> 14
+xyz(2)(3)(10) // -> 32
+
+const x2y3z = xyz(2)(3) // -> (Z) => 2 + 3 * Z
+// even though Y * Z has priority in the curried function and should evaluate first, x2y3z can exist without Z)
+
+x2y3z(4) // -> 14
+x2y3z(10) // -> 32
 ```
 
 ### `v` - Reverse
@@ -327,16 +331,13 @@ w(() => true, () => console.log('donkey')) // -> throws RangeError: Maximum call
 ```
 
 ### `x` - Extract
-`x(A)` returns:
-* The first element of `A` if it is an array.
-* The first character of `A` if is a string.
+`x(A, B)` returns property `A` of `B`. `B` can be either an array, string or object and `A` must be a valid property name for the respective data type.
 
 Examples:
 ```js
-x([]) // -> undefined
-x('') // -> undefined
-x([3, 2, 1]) // -> 3
-x('hello world') // -> 'h'
+x(0, [10, 20, 30]) // -> 10
+x(3, 'donkey') // -> 'k'
+x('foo', {foo: 'bar'}) // -> 'bar'
 ```
 
 ### `y` - Create array
