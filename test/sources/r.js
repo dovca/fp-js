@@ -1,23 +1,16 @@
 module.exports = (functionsModuleName) => () => {
 	const {r} = require(`${__dirname}/../../lib/${functionsModuleName}`);
 	const assert = require('assert');
+	const {spy} = require('sinon');
 
-	describe(`${functionsModuleName}/r - Curry`, function () {
+	describe(`${functionsModuleName}/r - Reduce`, function () {
 		const sum = (a, b) => a + b;
-		const multiply = (a, b) => a * b;
+		const or = (a, b) => a || b;
+		const not = (a) => !a;
 
-		it('Should work for binary functions by default', function () {
-			const curriedSum = r(sum);
-			const curriedMultiply = r(multiply);
+		it('Should work without arguments', function () {
 			const testCases = [
-				{output: () => curriedSum(0)(0), expected: 0},
-				{output: () => curriedSum(0)(1), expected: 1},
-				{output: () => curriedSum(1)(2), expected: 3},
-				{output: () => curriedSum(1000)(500), expected: 1500},
-				{output: () => curriedSum(-100)(500), expected: 400},
-				{output: () => curriedMultiply(0)(5), expected: 0},
-				{output: () => curriedMultiply(-10)(10), expected: -100},
-				{output: () => curriedMultiply(6)(6), expected: 36},
+				{output: () => r(), expected: undefined},
 			];
 
 			for (let i = 0, length = testCases.length; i < length; i++) {
@@ -29,19 +22,92 @@ module.exports = (functionsModuleName) => () => {
 			}
 		});
 
-		it('Should work for function of any arity', function () {
-			const curried1 = r((a) => -a, 1);
-			const curried2 = r(sum, 2);
-			const curried3 = r((a, b, c) => a + b + c, 3);
-			const curried5 = r((a, b, c, d, e) => (a + b) * c - d * e, 5);
+		it('Should work with function and no other arguments', function () {
+			const spiedOr = spy(or);
+			const spiedU = spy(r);
+
+			spiedU(spiedOr);
+			assert.deepStrictEqual(spiedOr.notCalled, true, `function passed to r should not have been called`);
+			assert.deepStrictEqual(spiedU.getCall(0).returned(undefined), true, `Expected r() to return undefined`);
+		});
+
+		it('Should work with function and one argument', function () {
+			const spiedOr = spy(or);
+			const spiedNot = spy(or);
+			const spiedSum = spy(or);
+
 			const testCases = [
-				{output: () => curried1(1), expected: -1},
-				{output: () => curried1(-42), expected: 42},
-				{output: () => curried2(3)(4), expected: 7},
-				{output: () => curried3(1)(10)(100), expected: 111},
-				{output: () => curried3(1)(1)(1), expected: 3},
-				{output: () => curried5(1)(2)(3)(4)(5), expected: -11},
-				{output: () => curried5(5)(4)(3)(2)(1), expected: 25},
+				{output: () => r(spiedOr, true), expected: true},
+				{output: () => r(spiedOr, false), expected: false},
+				{output: () => r(spiedNot, true), expected: true},
+				{output: () => r(spiedSum, 1), expected: 1},
+				{output: () => r(spiedSum, 50), expected: 50},
+				{output: () => r(spiedSum, 0), expected: 0},
+			];
+
+			for (let i = 0, length = testCases.length; i < length; i++) {
+				const tc = testCases[i];
+				const output = tc.output();
+				const expected = tc.expected;
+
+				assert.deepStrictEqual(output, expected, `Test case #${i}: ${output} should equal ${expected}`);
+			}
+
+			assert.deepStrictEqual(spiedOr.notCalled, true, `function 'or' passed to r should not have been called`);
+			assert.deepStrictEqual(spiedNot.notCalled, true, `function 'not' to r should not have been called`);
+			assert.deepStrictEqual(spiedSum.notCalled, true, `function 'sum to r should not have been called`);
+		});
+
+		it('Should work with function and two arguments', function () {
+			const testCases = [
+				{output: () => r(or, true, true), expected: true},
+				{output: () => r(or, false, true), expected: true},
+				{output: () => r(or, true, false), expected: true},
+				{output: () => r(or, false, false), expected: false},
+				{output: () => r(sum, 1, 2), expected: 3},
+				{output: () => r(sum, 50, 100), expected: 150},
+				{output: () => r(sum, 0, 0), expected: 0},
+			];
+
+			for (let i = 0, length = testCases.length; i < length; i++) {
+				const tc = testCases[i];
+				const output = tc.output();
+				const expected = tc.expected;
+
+				assert.deepStrictEqual(output, expected, `Test case #${i}: ${output} should equal ${expected}`);
+			}
+		});
+
+		it('Should work with function and many arguments', function () {
+			const testCases = [
+				{output: () => r(or, true, true, true, true), expected: true},
+				{output: () => r(or, true, true, true, false), expected: true},
+				{output: () => r(or, true, true, false, true), expected: true},
+				{output: () => r(or, true, true, false, false), expected: true},
+				{output: () => r(or, true, false, true, true), expected: true},
+				{output: () => r(or, true, false, true, false), expected: true},
+				{output: () => r(or, true, false, false, true), expected: true},
+				{output: () => r(or, true, false, false, false), expected: true},
+				{output: () => r(or, false, true, true, true), expected: true},
+				{output: () => r(or, false, true, true, false), expected: true},
+				{output: () => r(or, false, true, false, true), expected: true},
+				{output: () => r(or, false, true, false, false), expected: true},
+				{output: () => r(or, false, false, true, true), expected: true},
+				{output: () => r(or, false, false, true, false), expected: true},
+				{output: () => r(or, false, false, false, true), expected: true},
+				{output: () => r(or, false, false, false, false), expected: false},
+
+				{output: () => r(sum, 1, 2, 3, 4, 5), expected: 15},
+				{output: () => r(sum, 1, 1, 1, 1, 1, 1), expected: 6},
+				{output: () => r(sum, 1, -1, 1, -1, 1, -1), expected: 0},
+				{output: () => r(sum, -1, -1, -1, -1, -1, -1), expected: -6},
+				{output: () => r(sum, -1, 1, -1, 1, -1, 1), expected: 0},
+				{output: () => r(sum, 0, 0, 0, 0, 1), expected: 1},
+				{output: () => r(sum, 0, 0, 0, 1, 0), expected: 1},
+				{output: () => r(sum, 0, 0, 1, 0, 0), expected: 1},
+				{output: () => r(sum, 0, 1, 0, 0, 0), expected: 1},
+				{output: () => r(sum, 1, 0, 0, 0, 0), expected: 1},
+				{output: () => r(sum, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1), expected: 15},
 			];
 
 			for (let i = 0, length = testCases.length; i < length; i++) {

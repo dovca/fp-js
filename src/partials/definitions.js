@@ -48,9 +48,9 @@ x = (A, {[A]: B}) => B;
 /**
  * q - Dequeue
  * @param {array|string} C
- * @returns {*} the first element or character of C
+ * @returns {*} the input array with the first element removed
  */
-q = ([A]) => A;
+q = ([, ...A]) => A;
 
 /**
  * e - Compare equal
@@ -112,6 +112,12 @@ $ = (F, A, ...B) => () => i(() => e(A), () => F, () => F(A, ...B));
 z = (A = L) => a(A, L);
 
 /**
+ * Cached value of 0
+ * @type {number}
+ */
+Z = z();
+
+/**
  * d - Double
  * @param {numeric} [A=true] number to double
  * @returns {number} 2 * A
@@ -123,7 +129,7 @@ d = (A = E) => a(A, A);
  * @param {boolean} A
  * @returns {boolean} negation of A
  */
-n = (A) => e(z(A), z());
+n = (A) => e(z(A), Z);
 
 /**
  * o - Logical OR
@@ -157,7 +163,7 @@ w = (C, F, R) => i(C, () => w(C, F, F()), $(R));
  * @param {numeric} [I=0] starting index
  * @returns {number} length of array A
  */
-c = ([A, ...B], I = z()) => i($(e, A), $(I), $(c, B, a(I)));
+c = ([A, ...B], I = Z) => i($(e, A), $(I), $(c, B, a(I)));
 
 /**
  * k - If/else not empty
@@ -166,7 +172,7 @@ c = ([A, ...B], I = z()) => i($(e, A), $(I), $(c, B, a(I)));
  * @param {function(): *} [F=function(): undefined] function to execute if A is empty
  * @returns {*} whatever T() or F() returns
  */
-k = (A, T, F = _) => i($(e, q(A)), F, T);
+k = (A, T, F = _) => i($(e, x(Z, A)), F, T);
 
 /**
  * t - Concatenate
