@@ -1,6 +1,6 @@
 ## What is FP-JS about?
 
-The goal of this package is to provide a set of functions whose combinations can be used to write any synchronous JS logic. These functions are written _without any keywords, strings, numbers or array literals_ using as few JS operators as possible.
+The goal of this package is to provide a set of functions whose combinations can be used to write any synchronous JS logic. These functions are written _without any keywords; builtin objects; string, number or array literals; external dependencies_ using as few JS operators as possible.
 
 JavaScript operators currently used: `~`, `+`, `<`, `=`, `()`, `===`.
 
