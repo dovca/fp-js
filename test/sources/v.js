@@ -3,6 +3,20 @@ module.exports = (functionsModuleName) => () => {
 	const assert = require('assert');
 
 	describe(`${functionsModuleName}/v - Reverse`, function () {
+		it('Should work without arguments', function () {
+			const testCases = [
+				{output: () => v(), expected: []},
+			];
+
+			for (let i = 0, length = testCases.length; i < length; i++) {
+				const tc = testCases[i];
+				const output = tc.output();
+				const expected = tc.expected;
+
+				assert.deepStrictEqual(output, expected, `Test case #${i}: ${output} should equal ${expected}`);
+			}
+		});
+
 		it('Should work with one argument', function () {
 			const testCases = [
 				{output: () => v(null), expected: [null]},
