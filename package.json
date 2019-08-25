@@ -6,7 +6,9 @@
   "keywords": [
     "functional programming",
     "fp",
-    "minimal"
+    "minimal",
+    "experimental",
+    "esoteric"
   ],
   "author": "David Ovčačík <david@ovcacik.xyz> (https://github.com/dovca)",
   "license": "ISC",
