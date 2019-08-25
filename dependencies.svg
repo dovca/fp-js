@@ -543,11 +543,11 @@
 ["p", new Set(["g","v","k","$","_","i","e","x","z","o","y","l","a","n"])],
 ["r", new Set(["k","$","r","_","i","e","x","z","o","y","l","a","n"])],
 ["s", new Set(["r","a","y","k","$","_","i","e","x","z","o","l","n"])],
-["j", new Set(["k","$","r","j","_","i","e","x","z","o","y","l","a","n"])],
+["j", new Set(["k","$","r","_","j","i","e","x","z","o","y","l","a","n"])],
 ["u", new Set(["d","i","$","l","u","b","e","a","y","_","x","z","o","n"])],
 ["h", new Set(["i","$","k","h","_","x","z","o","y","l","a","e","n"])],
 ["f", new Set(["r","i","$","y","k","_","e","x","z","o","l","a","n"])]]);
-			var inverseDependencies = new Map([["_", new Set(["i","k","$","w","c","u","h","f","t","g","v","m","r","j","p","s"])],
+			var inverseDependencies = new Map([["_", new Set(["i","k","j","$","w","c","u","h","f","t","g","v","m","r","p","s"])],
 ["y", new Set(["l","i","t","v","m","s","f","a","b","z","o","u","d","c","n","k","$","w","h","g","r","j","p"])],
 ["x", new Set(["i","k","$","w","c","u","h","f","t","g","v","m","r","j","p","s"])],
 ["q", new Set([])],
