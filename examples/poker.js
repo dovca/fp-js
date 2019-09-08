@@ -17,6 +17,10 @@
 	twoHundredFifty = a(fifty, d(d(fifty))),
 	//The number 5
 	five = g(a, d, d, a)(),
+	//The number 4
+	four = b(five),
+	//The number 3
+	three = a(d()),
 	//The number 10
 	ten = d(five),
 	//The number 9
@@ -49,19 +53,13 @@
 	)))(),
 	//Array of all cards
 	cards = ((
-			rankValues = w( //Numbers from 2 to 14
-				(X) => l(c(X), thirteen), //While length of array is smaller than 13
+			makeSequence = (start, length) => w(
+				(X) => l(c(X), length), //While length of array is smaller than `length`
 				(X) => t(X, a(x(b(c(X)), X))), //Append (X[-1] + 1) to X
-				y(d())
+				y(start)
 			),
-			rankNames = t( //Numbers from 2 to 10 and named ranks
-				w(
-					(X) => l(c(X), nine),  //While length of array is smaller than 9
-					(X) => t(X, a(x(b(c(X)), X))), //Append (X[-1] + 1) to X
-					y(d()) //Start with X = [2]
-				),
-				'Jack', 'Queen', 'King', 'Ace'
-			),
+			rankValues = makeSequence(d(), thirteen), //Numbers from 2 to 14
+			rankNames = t(makeSequence(d(), nine), 'Jack', 'Queen', 'King', 'Ace'), //Numbers from 2 to 10 and named ranks
 			suits = y('Clubs', 'Diamonds', 'Hearts', 'Spades'),
 			suitSymbols = y('♣', '♦', '♥', '♠'),
 			zippedValues = x(z(), w( //rankValues and rankNames zipped together
@@ -71,13 +69,8 @@
 			))
 		) => x(z(), w( //Create sets of cards of each suit
 			([, I]) => l(I, c(suits)),
-			([result, I]) => y(
-				t(
-					result,
-					...m((Z) => t(Z, x(I, suits), x(I, suitSymbols)), ...zippedValues) //Create card structure [rank, name, suit, symbol]
-				),
-				a(I)
-			),
+			//Create card structure [rank, name, suit, symbol]
+			([result, I]) => y(t(result, ...m((Z) => t(Z, x(I, suits), x(I, suitSymbols)), ...zippedValues)), a(I)),
 			y(y(), z()) //Start with [[], 0]
 		))
 	)(),
@@ -129,7 +122,7 @@
 		symbol, '\t', name, ' of ', suit
 	),
 	//Function that plays a new game
-	getNextRound = ([c0, c1, c2, c3, c4, ...remainingDeckCards], cash, round) => (
+	getNextRound = ([c0, c1, c2, c3, c4, ...remainingDeckCards], cash, round = a()) => (
 		playingCards = y(c0, c1, c2, c3, c4),
 		_dummy = print(s('\n', ...x(z(), w( //Print numbered cards
 			([, , I]) => l(I, five),
@@ -149,7 +142,7 @@
 		)),
 		[refilledCards, deckCards] = x(z(), w( //Refill playing cards from the deck
 			([, I]) => l(z(), I),
-			([[refilled, deck], I]) => y(y(t(refilled, x(z(), deck)), q(deck)), b(I)),
+			([[refilled, [D, ...deck]], I]) => y(y(t(refilled, D), deck), b(I)),
 			y(y(selectedCards, t(remainingDeckCards, ...discardedCards)), c(discardedCards)) //Put the discarded cards back in the deck
 		)),
 		jacksOrBetter = (hand) => some(
@@ -157,7 +150,7 @@
 			(G) => e(d(), c(G)) //Find a group with two cards
 		),
 		twoPairs = (hand) => e(d(), c(f((G) => e(d(), c(G)), ...group(hand, getCardRank)))),
-		threeOfAKind = (hand) => some(group(hand, getCardRank), (G) => e(a(d()), c(G))),
+		threeOfAKind = (hand) => some(group(hand, getCardRank), (G) => e(three, c(G))),
 		straight = (hand) => ((
 			sortedNormal = sortByRank(hand),
 			sortedAceRankedOne = sortByRank(m( //Ace can be the lowest card in a straight, make its rank 1
@@ -171,7 +164,7 @@
 		) => some(
 			y(sortedNormal, sortedAceRankedOne),
 			(C) => n(x(z(), w(
-				([, , I]) => l(I, d(d())),
+				([, , I]) => l(I, four),
 				([result, [A, B, ...rest], I]) => y(
 					//Check if the rank difference between neighboring cards is 1
 					o(result, n(e(a(), b(getCardRank(B), getCardRank(A))))),
@@ -185,31 +178,31 @@
 		fullHouse = (hand) => ((
 				groupedByRank = group(hand, getCardRank)
 			) => n(o(
-				n(some(groupedByRank, (G) => e(a(d()), c(G)))), //Check for 3 cards of the same rank
+				n(some(groupedByRank, (G) => e(three, c(G)))), //Check for 3 cards of the same rank
 				n(some(groupedByRank, (G) => e(d(), c(G)))) //Check for 2 cards of the same rank, but a different one
 			))
 		)(),
-		fourOfAKind = (hand) => some(group(hand, getCardRank), (G) => e(d(d()), c(G))),
+		fourOfAKind = (hand) => some(group(hand, getCardRank), (G) => e(four, c(G))),
 		straightFlush = (hand) => n(o(
 			n(straight(hand)),
 			n(flush(hand))
 		)),
-		royalFlush = (hand) => n(o(
+		royalFlush = (hand) => n(r(o,
 			n(straight(hand)),
 			n(flush(hand)),
 			n(e(ten, getCardRank(x(z(), sortByRank(hand))))) //First card is a ten
 		)),
 		[combination, prize] = h(
-			y($(royalFlush, refilledCards), () => y('Royal flush!', twoHundredFifty)), //250
-			y($(straightFlush, refilledCards), () => y('Straight flush!', fifty)), //50
-			y($(fourOfAKind, refilledCards), () => y('Four of a kind!', twentyFive)), //25
-			y($(fullHouse, refilledCards), () => y('Full house!', b(nine))), //8
-			y($(flush, refilledCards), () => y('Flush!', five)), //5
-			y($(straight, refilledCards), () => y('Straight!', d(d()))), //4
-			y($(threeOfAKind, refilledCards), () => y('Three of a kind!', a(d()))), //3
-			y($(twoPairs, refilledCards), () => y('Two pairs!', d())), //2
-			y($(jacksOrBetter, refilledCards), () => y('Jacks or better!', a())), //1
-			y($(e()), () => y('No win.', z())) //0
+			y($(royalFlush, refilledCards), $(y, 'Royal flush!', twoHundredFifty)),
+			y($(straightFlush, refilledCards), $(y, 'Straight flush!', fifty)),
+			y($(fourOfAKind, refilledCards), $(y, 'Four of a kind!', twentyFive)),
+			y($(fullHouse, refilledCards), $(y, 'Full house!', b(nine))),
+			y($(flush, refilledCards), $(y, 'Flush!', five)),
+			y($(straight, refilledCards), $(y, 'Straight!', four)),
+			y($(threeOfAKind, refilledCards), $(y, 'Three of a kind!', three)),
+			y($(twoPairs, refilledCards), $(y, 'Two pairs!', d())),
+			y($(jacksOrBetter, refilledCards), $(y, 'Jacks or better!', a())),
+			y($(e()), $(y, 'No win.', z()))
 		),
 		newCash = a(prize, cash),
 		_dummy2 = print(s( //Print the results
@@ -238,6 +231,6 @@
 	startGame = (
 		print(s(formatCash(ten), '\n\n')),
 			question('Press Enter to play'),
-			getNextRound(shuffle(cards), ten, a())
+			getNextRound(shuffle(cards), ten)
 	)
 ) => startGame())();
