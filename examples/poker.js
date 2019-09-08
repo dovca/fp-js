@@ -236,7 +236,7 @@
 						getNextRound(shuffle(t(deckCards, ...refilledCards)), b(newCash), a(round))()
 				)
 			),
-			() => print('You have played too much today. See you later!')
+			() => print('You have played too much today. See you later!\n')
 		)
 	) => result,
 	startGame = (
