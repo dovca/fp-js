@@ -1,5 +1,5 @@
 const repl = require('repl');
-const fn = require('./lib/functions.debug');
+const fn = require('./lib/functions.js');
 const r = repl.start('> ');
 
 Object.keys(fn).forEach((k) => {

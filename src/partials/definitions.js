@@ -155,12 +155,12 @@ i = (C, T, F = _) => x(z(o(C())), y(F, T))();
 
 /**
  * w - While
- * @param {function(): boolean} C function that returns the condition expression
- * @param {function(): *} F function to call each iteration
- * @param {*} [R] (internal use) expression to return at the end
+ * @param {function(*): boolean} C function that returns the condition expression
+ * @param {function(*): *} F function to call each iteration
+ * @param {*} [R] expression to return at the end
  * @returns {*} whatever the last call to F returned or undefined
  */
-w = (C, F, R) => i(C, () => w(C, F, F()), $(R));
+w = (C, F, R = Z) => i($(C, R), () => w(C, F, F(R)), $(R));
 
 /**
  * c - Count
