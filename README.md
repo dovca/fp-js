@@ -319,12 +319,12 @@ v(...'donkey').join('') // -> 'yeknod'
 ```
 
 ### `w` - While
-`w(C, F, R)` calls function `F` repeatedly as long as `C()` returns a [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) value. `w()` returns the return value of the last call to `F`. In each iteration, both calls to `C` and `F` are passed the return value of `F()` from the previous iteration. In the first iteration, this value is equal to `R`. If argument `R` is omitted, it defaults to 0.`
+`w(C, F, R)` calls function `F` repeatedly as long as `C()` returns a [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) value. `w()` returns the return value of the last call to `F`. In each iteration, both calls to `C` and `F` are passed the return value of `F()` from the previous iteration. In the first iteration, this value is equal to `R`. If argument `R` is omitted, it defaults to 0. If `F` hasn't been called at all, the return value of `w()` is `R`.
 
 Examples:
 ```js
 let A = 0, B = 0;
-w(() => false, () => (console.log('foo'), 'bar')) // -> undefined (and nothing is logged)
+w(() => false, () => (console.log('foo'), 'bar')) // -> 0 (and nothing is logged)
 w(() => true, () => console.log('donkey')) // -> throws RangeError: Maximum call stack size exceeded (this will print so many donkeys though...)
 w(() => A < 5, () => (console.log(A), A++)) // -> 4 (and logs 0, 1, 2, 3, 4)
 w(() => B < 5, () => (console.log(B), ++B)) // -> 5 (and logs 0, 1, 2, 3, 4)
