@@ -23,6 +23,8 @@
 	nine = b(ten),
 	//Function to get a card rank
 	getCardRank = ([rank]) => rank,
+	//Function to get a card suit
+	getCardSuit = ([, , suit]) => suit,
 	//Function to format a cash amount
 	formatCash = (cash) => s('Cash: $', cash, i($(l, cash, a()), $(s()), $(z()))),
 	//Array.prorotype.every
@@ -93,8 +95,8 @@
 	) => g(fold, fold, fold, fold, fold)(array))(),
 	//Function to group array elements by equal properties
 	//group([[1], [3], [2], [4], [2], [1], [1]], 0) -> [ [[1],[1],[1]], [[2],[2]], [[4]], [[3]] ]
-	group = (array, propFunction) => ((
-		compare = (A, B) => e(x(propFunction(), A), x(propFunction(), B))
+	group = (array, identifier) => ((
+		compare = (A, B) => e(identifier(A), identifier(B))
 	) => r( //reduce cards with accumulator A = [] by C:
 		(C, A) => i( //if A contains a group with a card equal to C
 			() => k(
@@ -151,11 +153,11 @@
 			y(y(selectedCards, t(remainingDeckCards, ...discardedCards)), c(discardedCards)) //Put the discarded cards back in the deck
 		)),
 		jacksOrBetter = (hand) => some(
-			group(f((C) => l(ten, getCardRank(C)), ...hand), $(z())), //Filter only JQKA and group by rank
+			group(f((C) => l(ten, getCardRank(C)), ...hand), getCardRank), //Filter only JQKA and group by rank
 			(G) => e(d(), c(G)) //Find a group with two cards
 		),
-		twoPairs = (hand) => e(d(), c(f((G) => e(d(), c(G)), ...group(hand, $(z()))))),
-		threeOfAKind = (hand) => some(group(hand, $(z())), (G) => e(a(d()), c(G))),
+		twoPairs = (hand) => e(d(), c(f((G) => e(d(), c(G)), ...group(hand, getCardRank)))),
+		threeOfAKind = (hand) => some(group(hand, getCardRank), (G) => e(a(d()), c(G))),
 		straight = (hand) => ((
 			sortedNormal = sortByRank(hand),
 			sortedAceRankedOne = sortByRank(m( //Ace can be the lowest card in a straight, make its rank 1
@@ -179,15 +181,15 @@
 				y(l(), C, z())
 			)))
 		))(),
-		flush = (hand) => e(a(), c(group(hand, $(d())))),
+		flush = (hand) => e(a(), c(group(hand, getCardSuit))),
 		fullHouse = (hand) => ((
-				groupedByRank = group(hand, $(z()))
+				groupedByRank = group(hand, getCardRank)
 			) => n(o(
 				n(some(groupedByRank, (G) => e(a(d()), c(G)))), //Check for 3 cards of the same rank
 				n(some(groupedByRank, (G) => e(d(), c(G)))) //Check for 2 cards of the same rank, but a different one
 			))
 		)(),
-		fourOfAKind = (hand) => some(group(hand, $(z())), (G) => e(d(d()), c(G))),
+		fourOfAKind = (hand) => some(group(hand, getCardRank), (G) => e(d(d()), c(G))),
 		straightFlush = (hand) => n(o(
 			n(straight(hand)),
 			n(flush(hand))
