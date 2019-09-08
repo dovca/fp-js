@@ -7,14 +7,20 @@
 	{random} = Math,
 	//Function to output a message
 	print = (text) => process.stdout.write(text),
-	//The number 250
-	twoHundredFifty = p(a, d, a, d, a, d, a, d, a, d, d, a, d)(),
 	//The number 13
 	thirteen = g(a, d, d, a, d, a)(),
-	//The number 10
-	ten = g(d, a, d, d, a)(),
+	//The number 25
+	twentyFive = b(d(thirteen)),
+	//The number 50
+	fifty = d(twentyFive),
+	//The number 250
+	twoHundredFifty = a(fifty, d(d(fifty))),
 	//The number 5
 	five = g(a, d, d, a)(),
+	//The number 10
+	ten = d(five),
+	//The number 9
+	nine = b(ten),
 	//Function to get a card rank
 	getCardRank = ([rank]) => rank,
 	//Function to format a cash amount
@@ -25,63 +31,57 @@
 	some = (array, fn) => r((V, A) => o(A, fn(V)), ...array, l()),
 	//Array.protoype.sort (bubblesort)
 	sort = (array, fn) => ((
-		sort = ([A, B, ...rest]) => i(
+		bubble = ([A, B, ...rest]) => i(
 			$(e, B),
 			$(y, A),
 			() => i(
 				$(fn, A, B),
-				() => y(A, ...sort(y(B, ...rest))),
-				() => y(B, ...sort(y(A, ...rest)))
+				() => y(A, ...bubble(y(B, ...rest))),
+				() => y(B, ...bubble(y(A, ...rest)))
 			)
 		)
 	) => x(z(), w(
 		([, I]) => l(z(), I),
-		([result, I]) => y(sort(result), b(I)),
+		([result, I]) => y(bubble(result), b(I)),
 		y(array, c(array))
 	)))(),
 	//Array of all cards
-	cards = $(
-		(rankValues, rankNames, suits, suitSymbols) => $(
-			(zippedValues) => x(z(), w( //Create sets of cards of each suit
-				([, I]) => l(I, c(suits)),
-				([result, I]) => y(
-					t(
-						result,
-						...m((Z) => t(Z, x(I, suits), x(I, suitSymbols)), ...zippedValues) //Create card structure [rank, name, suit, symbol]
-					),
-					a(I)
+	cards = ((
+			rankValues = w( //Numbers from 2 to 14
+				(X) => l(c(X), thirteen), //While length of array is smaller than 13
+				(X) => t(X, a(x(b(c(X)), X))), //Append (X[-1] + 1) to X
+				y(d())
+			),
+			rankNames = t( //Numbers from 2 to 10 and named ranks
+				w(
+					(X) => l(c(X), nine),  //While length of array is smaller than 9
+					(X) => t(X, a(x(b(c(X)), X))), //Append (X[-1] + 1) to X
+					y(d()) //Start with X = [2]
 				),
-				y(y(), z()) //Start with [[], 0]
-			)),
-			x(z(), w( //rankValues and rankNames zipped together
+				'Jack', 'Queen', 'King', 'Ace'
+			),
+			suits = y('Clubs', 'Diamonds', 'Hearts', 'Spades'),
+			suitSymbols = y('♣', '♦', '♥', '♠'),
+			zippedValues = x(z(), w( //rankValues and rankNames zipped together
 				([, I]) => l(I, thirteen),
 				([result, I, [V, ...values], [N, ...names]]) => y(t(result, y(V, N)), a(I), values, names),
 				y(y(), z(), rankValues, rankNames)
 			))
-		)(),
-		w( //Numbers from 2 to 14
-			(X) => l(c(X), thirteen), //While length of array is smaller than 13
-			(X) => t(X, a(x(b(c(X)), X))), //Append (X[-1] + 1) to X
-			y(d())
-		),
-		t( //Numbers from 2 to 10 and named ranks
-			$(
-				(nine) => w(
-					(X) => l(c(X), nine),  //While length of array is smaller than 9
-					(X) => t(X, a(x(b(c(X)), X))), //Append (X[-1] + 1) to X
-					y(d())
-				), //Start with X = [2]
-				g(a, d, d, d, a)()
-			)(),
-			'Jack', 'Queen', 'King', 'Ace'
-		),
-		y('Clubs', 'Diamonds', 'Hearts', 'Spades'),
-		y('♣', '♦', '♥', '♠')
+		) => x(z(), w( //Create sets of cards of each suit
+			([, I]) => l(I, c(suits)),
+			([result, I]) => y(
+				t(
+					result,
+					...m((Z) => t(Z, x(I, suits), x(I, suitSymbols)), ...zippedValues) //Create card structure [rank, name, suit, symbol]
+				),
+				a(I)
+			),
+			y(y(), z()) //Start with [[], 0]
+		))
 	)(),
 	//Function to return a new shuffled array
-	shuffle = (array) => $(
-		(X) => g(X, X, X, X, X)(array),
-		(values) => x(z(), w(
+	shuffle = (array) => ((
+		fold = (values) => x(z(), w(
 			([result]) => l(c(result), c(values)), //While there are still values left to pick
 			([result, [head, ...H], [tail, ...T]]) => i(
 				() => l(a(), d(random())),
@@ -90,32 +90,31 @@
 			),
 			y(y(), values, v(...values))
 		))
-	)(),
+	) => g(fold, fold, fold, fold, fold)(array))(),
 	//Function to group array elements by equal properties
 	//group([[1], [3], [2], [4], [2], [1], [1]], 0) -> [ [[1],[1],[1]], [[2],[2]], [[4]], [[3]] ]
-	group = (array, propFunction) => $(
-		(compare) => r( //reduce cards with accumulator A = [] by C:
-			(C, A) => i( //if A contains a group with a card equal to C
-				() => k(
-					A,
-					$(some(A, (V) => compare(x(z(), V), C))),
-					$(l())
-				),
-				() => m( //A = map A by G:
-					(G) => i( //if G[0] equals C
-						$(compare, x(z(), G), C),
-						$(t, G, C), //push C to G and return G
-						$(G) //return G unchanged
-					),
-					...A
-				),
-				$(t, A, y(C)) //push [C] to A
+	group = (array, propFunction) => ((
+		compare = (A, B) => e(x(propFunction(), A), x(propFunction(), B))
+	) => r( //reduce cards with accumulator A = [] by C:
+		(C, A) => i( //if A contains a group with a card equal to C
+			() => k(
+				A,
+				$(some(A, (V) => compare(x(z(), V), C))),
+				$(l())
 			),
-			...array,
-			y()
+			() => m( //then A = map A by G:
+				(G) => i( //if G[0] equals C
+					$(compare, x(z(), G), C),
+					$(t, G, C), //then push C to G and return G
+					$(G) //else return G unchanged
+				),
+				...A
+			),
+			$(t, A, y(C)) //else push [C] to A
 		),
-		(A, B) => e(x(propFunction(), A), x(propFunction(), B))
-	)(),
+		...array,
+		y()
+	))(),
 	//Function to sort cards by rank
 	sortByRank = (C) => sort(C, (A, B) => l(getCardRank(A), getCardRank(B))),
 	//Function to get the display name of a card
@@ -125,11 +124,7 @@
 			(V) => s(' ', V),
 			s(i($(l, ten, rank), $(x, z(), name), $(rank))) //If it's not a number, use the first letter
 		),
-		symbol,
-		'\t',
-		name,
-		' of ',
-		suit
+		symbol, '\t', name, ' of ', suit
 	),
 	//Function that plays a new game
 	getNextRound = ([c0, c1, c2, c3, c4, ...remainingDeckCards], cash, round) => (
@@ -161,22 +156,9 @@
 		),
 		twoPairs = (hand) => e(d(), c(f((G) => e(d(), c(G)), ...group(hand, $(z()))))),
 		threeOfAKind = (hand) => some(group(hand, $(z())), (G) => e(a(d()), c(G))),
-		straight = (hand) => $(
-			(sortedNormal, sortedAceRankedOne) => some(
-				y(sortedNormal, sortedAceRankedOne),
-				(C) => n(x(z(), w(
-					([, , I]) => l(I, d(d())),
-					([result, [A, B, ...rest], I]) => y(
-						//Check if the rank difference between neighboring cards is 1
-						o(result, n(e(a(), b(getCardRank(B), getCardRank(A))))),
-						y(B, ...rest),
-						a(I)
-					),
-					y(l(), C, z())
-				)))
-			),
-			sortByRank(hand),
-			sortByRank(m( //Ace can be the lowest card in a straight, make its rank 1
+		straight = (hand) => ((
+			sortedNormal = sortByRank(hand),
+			sortedAceRankedOne = sortByRank(m( //Ace can be the lowest card in a straight, make its rank 1
 				(V) => i(
 					$(e, a(thirteen), getCardRank(V)),
 					$(y(a(), ...q(V))),
@@ -184,14 +166,26 @@
 				),
 				...hand
 			))
-		)(),
+		) => some(
+			y(sortedNormal, sortedAceRankedOne),
+			(C) => n(x(z(), w(
+				([, , I]) => l(I, d(d())),
+				([result, [A, B, ...rest], I]) => y(
+					//Check if the rank difference between neighboring cards is 1
+					o(result, n(e(a(), b(getCardRank(B), getCardRank(A))))),
+					y(B, ...rest),
+					a(I)
+				),
+				y(l(), C, z())
+			)))
+		))(),
 		flush = (hand) => e(a(), c(group(hand, $(d())))),
-		fullHouse = (hand) => $(
-			(groupedByRank) => n(o(
+		fullHouse = (hand) => ((
+				groupedByRank = group(hand, $(z()))
+			) => n(o(
 				n(some(groupedByRank, (G) => e(a(d()), c(G)))), //Check for 3 cards of the same rank
 				n(some(groupedByRank, (G) => e(d(), c(G)))) //Check for 2 cards of the same rank, but a different one
-			)),
-			group(hand, $(z()))
+			))
 		)(),
 		fourOfAKind = (hand) => some(group(hand, $(z())), (G) => e(d(d()), c(G))),
 		straightFlush = (hand) => n(o(
@@ -205,12 +199,12 @@
 		)),
 		[combination, prize] = h(
 			y($(royalFlush, refilledCards), () => y('Royal flush!', twoHundredFifty)), //250
-			y($(straightFlush, refilledCards), () => y('Straight flush!', p(a, d, a, d, d, d, a, d)())), //50
-			y($(fourOfAKind, refilledCards), () => y('Four of a kind!', p(a, d, a, d, d, d, a)())), //25
-			y($(fullHouse, refilledCards), () => y('Full house!', p(a, d, d, d)())), //8
-			y($(flush, refilledCards), () => y('Flush!', p(a, d, d, a)())), //5
-			y($(straight, refilledCards), () => y('Straight!', p(a, d, d)())), //4
-			y($(threeOfAKind, refilledCards), () => y('Three of a kind!', p(a, d, a)())), //3
+			y($(straightFlush, refilledCards), () => y('Straight flush!', fifty)), //50
+			y($(fourOfAKind, refilledCards), () => y('Four of a kind!', twentyFive)), //25
+			y($(fullHouse, refilledCards), () => y('Full house!', b(nine))), //8
+			y($(flush, refilledCards), () => y('Flush!', five)), //5
+			y($(straight, refilledCards), () => y('Straight!', d(d()))), //4
+			y($(threeOfAKind, refilledCards), () => y('Three of a kind!', a(d()))), //3
 			y($(twoPairs, refilledCards), () => y('Two pairs!', d())), //2
 			y($(jacksOrBetter, refilledCards), () => y('Jacks or better!', a())), //1
 			y($(e()), () => y('No win.', z())) //0
@@ -230,7 +224,7 @@
 			() => i(
 				$(l, newCash, a()), //Check if the player still has money
 				() => print('You have no more money. See you later!\n'),
-				() =>(
+				() => (
 					question('Press Enter to play again'),
 						//Put the winning cards back in the deck, shuffle and play again
 						getNextRound(shuffle(t(deckCards, ...refilledCards)), b(newCash), a(round))()
